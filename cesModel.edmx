@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="cesModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="job_demand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job_field_id" Type="uint" Nullable="false" />
+          <Property Name="province_id" Type="uint" Nullable="false" />
+          <Property Name="demand" Type="uint" />
+          <Property Name="forecast_year" Type="uint" />
+          <Property Name="program_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="job_fields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="job_requirements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job_field_id" Type="uint" Nullable="false" />
+          <Property Name="program_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="programs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="parent" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="provinces">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="acronym" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="universities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="province_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="university_programs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="university_id" Type="uint" Nullable="false" />
+          <Property Name="program_id" Type="uint" Nullable="false" />
+          <Property Name="current_enrollment" Type="uint" Nullable="false" />
+          <Property Name="available_seats" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usernames">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="job_dem_fiel">
+          <End Role="job_fields" Type="Self.job_fields" Multiplicity="1" />
+          <End Role="job_demand" Type="Self.job_demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_demand">
+              <PropertyRef Name="job_field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_dem_prog">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="job_demand" Type="Self.job_demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_demand">
+              <PropertyRef Name="program_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_dem_prov">
+          <End Role="provinces" Type="Self.provinces" Multiplicity="1" />
+          <End Role="job_demand" Type="Self.job_demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provinces">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_demand">
+              <PropertyRef Name="province_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_req_field">
+          <End Role="job_fields" Type="Self.job_fields" Multiplicity="1" />
+          <End Role="job_requirements" Type="Self.job_requirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_requirements">
+              <PropertyRef Name="job_field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_req_prog">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="job_requirements" Type="Self.job_requirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_requirements">
+              <PropertyRef Name="program_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="prog_id">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="university_programs" Type="Self.university_programs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="university_programs">
+              <PropertyRef Name="program_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="prov_uni_id">
+          <End Role="provinces" Type="Self.provinces" Multiplicity="1" />
+          <End Role="universities" Type="Self.universities" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="provinces">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="universities">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="uni_id">
+          <End Role="universities" Type="Self.universities" Multiplicity="1" />
+          <End Role="university_programs" Type="Self.university_programs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="universities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="university_programs">
+              <PropertyRef Name="university_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cesModelStoreContainer">
+          <EntitySet Name="job_demand" EntityType="Self.job_demand" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="job_fields" EntityType="Self.job_fields" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="job_requirements" EntityType="Self.job_requirements" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="programs" EntityType="Self.programs" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="provinces" EntityType="Self.provinces" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="universities" EntityType="Self.universities" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="university_programs" EntityType="Self.university_programs" Schema="ces" store:Type="Tables" />
+          <EntitySet Name="usernames" EntityType="Self.usernames" Schema="ces" store:Type="Tables" />
+          <AssociationSet Name="job_dem_fiel" Association="Self.job_dem_fiel">
+            <End Role="job_fields" EntitySet="job_fields" />
+            <End Role="job_demand" EntitySet="job_demand" />
+          </AssociationSet>
+          <AssociationSet Name="job_dem_prog" Association="Self.job_dem_prog">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="job_demand" EntitySet="job_demand" />
+          </AssociationSet>
+          <AssociationSet Name="job_dem_prov" Association="Self.job_dem_prov">
+            <End Role="provinces" EntitySet="provinces" />
+            <End Role="job_demand" EntitySet="job_demand" />
+          </AssociationSet>
+          <AssociationSet Name="job_req_field" Association="Self.job_req_field">
+            <End Role="job_fields" EntitySet="job_fields" />
+            <End Role="job_requirements" EntitySet="job_requirements" />
+          </AssociationSet>
+          <AssociationSet Name="job_req_prog" Association="Self.job_req_prog">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="job_requirements" EntitySet="job_requirements" />
+          </AssociationSet>
+          <AssociationSet Name="prog_id" Association="Self.prog_id">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="university_programs" EntitySet="university_programs" />
+          </AssociationSet>
+          <AssociationSet Name="prov_uni_id" Association="Self.prov_uni_id">
+            <End Role="provinces" EntitySet="provinces" />
+            <End Role="universities" EntitySet="universities" />
+          </AssociationSet>
+          <AssociationSet Name="uni_id" Association="Self.uni_id">
+            <End Role="universities" EntitySet="universities" />
+            <End Role="university_programs" EntitySet="university_programs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="job_demand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job_field_id" Type="Int64" Nullable="false" />
+          <Property Name="province_id" Type="Int64" Nullable="false" />
+          <Property Name="demand" Type="Int64" />
+          <Property Name="forecast_year" Type="Int64" />
+          <Property Name="program_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="job_fields" Relationship="Self.job_dem_fiel" FromRole="job_demand" ToRole="job_fields" />
+          <NavigationProperty Name="program" Relationship="Self.job_dem_prog" FromRole="job_demand" ToRole="programs" />
+          <NavigationProperty Name="province" Relationship="Self.job_dem_prov" FromRole="job_demand" ToRole="provinces" />
+        </EntityType>
+        <EntityType Name="job_fields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="job_demand" Relationship="Self.job_dem_fiel" FromRole="job_fields" ToRole="job_demand" />
+          <NavigationProperty Name="job_requirements" Relationship="Self.job_req_field" FromRole="job_fields" ToRole="job_requirements" />
+        </EntityType>
+        <EntityType Name="job_requirements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job_field_id" Type="Int64" Nullable="false" />
+          <Property Name="program_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="job_fields" Relationship="Self.job_req_field" FromRole="job_requirements" ToRole="job_fields" />
+          <NavigationProperty Name="program" Relationship="Self.job_req_prog" FromRole="job_requirements" ToRole="programs" />
+        </EntityType>
+        <EntityType Name="program">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parent" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="job_demand" Relationship="Self.job_dem_prog" FromRole="programs" ToRole="job_demand" />
+          <NavigationProperty Name="job_requirements" Relationship="Self.job_req_prog" FromRole="programs" ToRole="job_requirements" />
+          <NavigationProperty Name="university_programs" Relationship="Self.prog_id" FromRole="programs" ToRole="university_programs" />
+        </EntityType>
+        <EntityType Name="province">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="acronym" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="job_demand" Relationship="Self.job_dem_prov" FromRole="provinces" ToRole="job_demand" />
+          <NavigationProperty Name="university" Relationship="Self.prov_uni_id" FromRole="provinces" ToRole="universities" />
+        </EntityType>
+        <EntityType Name="university">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="province_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="province" Relationship="Self.prov_uni_id" FromRole="universities" ToRole="provinces" />
+          <NavigationProperty Name="university_programs" Relationship="Self.uni_id" FromRole="universities" ToRole="university_programs" />
+        </EntityType>
+        <EntityType Name="university_programs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="university_id" Type="Int64" Nullable="false" />
+          <Property Name="program_id" Type="Int64" Nullable="false" />
+          <Property Name="current_enrollment" Type="Int64" Nullable="false" />
+          <Property Name="available_seats" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="program" Relationship="Self.prog_id" FromRole="university_programs" ToRole="programs" />
+          <NavigationProperty Name="university" Relationship="Self.uni_id" FromRole="university_programs" ToRole="universities" />
+        </EntityType>
+        <EntityType Name="username">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="job_dem_fiel">
+          <End Role="job_fields" Type="Self.job_fields" Multiplicity="1" />
+          <End Role="job_demand" Type="Self.job_demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_demand">
+              <PropertyRef Name="job_field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_dem_prog">
+          <End Role="programs" Type="Self.program" Multiplicity="1" />
+          <End Role="job_demand" Type="Self.job_demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_demand">
+              <PropertyRef Name="program_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_dem_prov">
+          <End Role="provinces" Type="Self.province" Multiplicity="1" />
+          <End Role="job_demand" Type="Self.job_demand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provinces">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_demand">
+              <PropertyRef Name="province_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_req_field">
+          <End Role="job_fields" Type="Self.job_fields" Multiplicity="1" />
+          <End Role="job_requirements" Type="Self.job_requirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_fields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_requirements">
+              <PropertyRef Name="job_field_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_req_prog">
+          <End Role="programs" Type="Self.program" Multiplicity="1" />
+          <End Role="job_requirements" Type="Self.job_requirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_requirements">
+              <PropertyRef Name="program_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="prog_id">
+          <End Role="programs" Type="Self.program" Multiplicity="1" />
+          <End Role="university_programs" Type="Self.university_programs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="university_programs">
+              <PropertyRef Name="program_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="prov_uni_id">
+          <End Role="provinces" Type="Self.province" Multiplicity="1" />
+          <End Role="universities" Type="Self.university" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="provinces">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="universities">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="uni_id">
+          <End Role="universities" Type="Self.university" Multiplicity="1" />
+          <End Role="university_programs" Type="Self.university_programs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="universities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="university_programs">
+              <PropertyRef Name="university_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="job_demand" EntityType="Self.job_demand" />
+          <EntitySet Name="job_fields" EntityType="Self.job_fields" />
+          <EntitySet Name="job_requirements" EntityType="Self.job_requirements" />
+          <EntitySet Name="programs" EntityType="Self.program" />
+          <EntitySet Name="provinces" EntityType="Self.province" />
+          <EntitySet Name="universities" EntityType="Self.university" />
+          <EntitySet Name="university_programs" EntityType="Self.university_programs" />
+          <EntitySet Name="usernames" EntityType="Self.username" />
+          <AssociationSet Name="job_dem_fiel" Association="Self.job_dem_fiel">
+            <End Role="job_fields" EntitySet="job_fields" />
+            <End Role="job_demand" EntitySet="job_demand" />
+          </AssociationSet>
+          <AssociationSet Name="job_dem_prog" Association="Self.job_dem_prog">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="job_demand" EntitySet="job_demand" />
+          </AssociationSet>
+          <AssociationSet Name="job_dem_prov" Association="Self.job_dem_prov">
+            <End Role="provinces" EntitySet="provinces" />
+            <End Role="job_demand" EntitySet="job_demand" />
+          </AssociationSet>
+          <AssociationSet Name="job_req_field" Association="Self.job_req_field">
+            <End Role="job_fields" EntitySet="job_fields" />
+            <End Role="job_requirements" EntitySet="job_requirements" />
+          </AssociationSet>
+          <AssociationSet Name="job_req_prog" Association="Self.job_req_prog">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="job_requirements" EntitySet="job_requirements" />
+          </AssociationSet>
+          <AssociationSet Name="prog_id" Association="Self.prog_id">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="university_programs" EntitySet="university_programs" />
+          </AssociationSet>
+          <AssociationSet Name="prov_uni_id" Association="Self.prov_uni_id">
+            <End Role="provinces" EntitySet="provinces" />
+            <End Role="universities" EntitySet="universities" />
+          </AssociationSet>
+          <AssociationSet Name="uni_id" Association="Self.uni_id">
+            <End Role="universities" EntitySet="universities" />
+            <End Role="university_programs" EntitySet="university_programs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cesModelStoreContainer" CdmEntityContainer="cesEntities">
+          <EntitySetMapping Name="job_demand">
+            <EntityTypeMapping TypeName="cesModel.job_demand">
+              <MappingFragment StoreEntitySet="job_demand">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="job_field_id" ColumnName="job_field_id" />
+                <ScalarProperty Name="province_id" ColumnName="province_id" />
+                <ScalarProperty Name="demand" ColumnName="demand" />
+                <ScalarProperty Name="forecast_year" ColumnName="forecast_year" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="job_fields">
+            <EntityTypeMapping TypeName="cesModel.job_fields">
+              <MappingFragment StoreEntitySet="job_fields">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="job_requirements">
+            <EntityTypeMapping TypeName="cesModel.job_requirements">
+              <MappingFragment StoreEntitySet="job_requirements">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="job_field_id" ColumnName="job_field_id" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="programs">
+            <EntityTypeMapping TypeName="cesModel.program">
+              <MappingFragment StoreEntitySet="programs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provinces">
+            <EntityTypeMapping TypeName="cesModel.province">
+              <MappingFragment StoreEntitySet="provinces">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="acronym" ColumnName="acronym" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="universities">
+            <EntityTypeMapping TypeName="cesModel.university">
+              <MappingFragment StoreEntitySet="universities">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="province_id" ColumnName="province_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="university_programs">
+            <EntityTypeMapping TypeName="cesModel.university_programs">
+              <MappingFragment StoreEntitySet="university_programs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="university_id" ColumnName="university_id" />
+                <ScalarProperty Name="program_id" ColumnName="program_id" />
+                <ScalarProperty Name="current_enrollment" ColumnName="current_enrollment" />
+                <ScalarProperty Name="available_seats" ColumnName="available_seats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usernames">
+            <EntityTypeMapping TypeName="cesModel.username">
+              <MappingFragment StoreEntitySet="usernames">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username1" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

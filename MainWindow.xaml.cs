@@ -1,0 +1,454 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.Text.RegularExpressions;
+
+namespace WpfTest
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+
+        //private variables that i don't know where to put
+        private cesEntities ces;    //EF entity
+        SolidColorBrush defaultBack = new SolidColorBrush(Color.FromRgb(5, 20, 35));
+        SolidColorBrush midToneBack = new SolidColorBrush(Color.FromRgb(10, 40, 70));
+        SolidColorBrush hlightBack = new SolidColorBrush(Color.FromRgb(20, 80, 200));
+        SolidColorBrush hlightLightBack = new SolidColorBrush(Color.FromRgb(120, 200, 255));
+        private int selectedId; //save the state for selected button on a map
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ces = new cesEntities();        
+
+            //set background colour
+            dckMain.Background = defaultBack;
+            selectedId = 0;
+ 
+            //grid margin 
+            gridMap.Margin = new Thickness(50, 10, 50, 10);
+            gridMap.Background = new  SolidColorBrush(Color.FromRgb(5, 20, 35));
+
+            //build menu
+            map_buildPriMenu();
+            //clear map of default colours
+            map_clearColours();
+
+        }
+
+        //map functions
+        void map_ColourPrograms(int prog_id)    //send the id of a university program to colour by
+        {
+            using (var context = new cesEntities())
+            {
+
+                //get data -> province and demand for the program
+                var demands = from d in ces.job_demand
+                              join p in ces.provinces on d.province_id equals p.id
+                              where d.program_id == prog_id
+                              select new { d.demand, p.acronym };
+
+
+                //heat map colours
+                foreach (var d in demands) {
+                    byte r = 0;
+                    byte g = 0;
+                    byte b = 0;
+
+
+                    //RED
+                    if (d.demand < 0)
+                    {
+                        if (d.demand <= -50)
+                            r = (byte)(400 + d.demand * 3);
+                        else if (d.demand > -50)
+                        {
+                            r = 150;
+                        }
+                    } else if (d.demand > 50)
+                    {
+                        r = (byte)(-50 + d.demand);
+                    }
+
+                    //BLUE
+                   if (d.demand < -50) {                       
+                            b = (byte)(-100 - (2*d.demand));
+                    }
+                    else if (d.demand > 50)
+                    {
+                        g = (byte)(-50 + d.demand);
+                    }
+
+
+                    //GREEN
+                    if (d.demand >0)
+                    {
+                        g = (byte)(100 + 1.05*d.demand);   
+                    }
+
+                    
+
+                    //colour the map province by province with gigantor switch cause i don't know how to do data binding
+                    SolidColorBrush c = new SolidColorBrush(Color.FromRgb(r, g, b));
+                    switch (d.acronym)
+                    {
+                        case "ab":
+                            fillAb(c);
+                            break;
+                        case "bc":
+                            fillBc(c);
+                            break;
+                        case "mb":
+                            fillMb(c);
+                            break;
+                        case "nb":
+                            fillNb(c);
+                            break;
+                        case "ns":
+                            fillNs(c);
+                            break;
+                        case "nf":
+                            fillNf(c);
+                            break;
+                        case "pe":
+                            fillPe(c);
+                            break;
+                        case "on":
+                            fillOn(c);
+                            break;
+                        case "qc":
+                            fillPq(c);
+                            break;
+                        case "sk":
+                            fillSk(c);
+                            break;
+                        case "Yk":
+                            fillYk(c);
+                            break;
+                        case "Nv":
+                            fillNvt(c);
+                            break;
+                        case "Nw":
+                            fillNwt(c);
+                            break;
+                    }
+                        
+                    
+
+
+
+                }
+            }
+        }   
+        void map_clearColours()
+        {
+            SolidColorBrush nearWhite = new SolidColorBrush(Color.FromRgb(225, 225, 225));
+            fillBc(nearWhite);
+            fillAb(nearWhite);
+            fillSk(nearWhite);
+            fillMb(nearWhite);
+
+            fillPq(nearWhite);
+            fillOn(nearWhite);
+            fillNf(nearWhite);
+            fillNb(nearWhite);
+            fillNs(nearWhite);
+            fillPe(nearWhite);
+            fillNwt(nearWhite);
+            fillNvt(nearWhite);
+            fillYk(nearWhite);
+        }   //clear the whole map
+
+        private void map_buildPriMenu(int clickedBtn=0)
+        {
+            btnNavPri.Children.Clear();
+            using (var context = new cesEntities())
+            {
+                var programs = from p in ces.programs
+                               where p.parent == 0
+                               select new { p.name, p.id };
+
+                foreach (var p in programs)
+                {
+                    Button b = new Button();
+                    b.Name = "btnPri_" + p.id;
+                    b.Content = p.name;
+                    b.Style = this.FindResource("btnUnselStyle") as Style;
+
+                    if (clickedBtn == p.id)
+                        b.Background = hlightBack;
+                    else
+                        b.Background = midToneBack;
+                    b.Click += btnPri_Click;
+                    btnNavPri.Children.Add(b);
+                }
+            }
+        }
+        private void map_buildSecMenu(int parentId, int clickedBtn=0)
+        {
+            btnNavSec.Children.Clear();
+            using (var context = new cesEntities())
+            {
+                var programs = from p in ces.programs
+                               where p.parent == parentId
+                               select new { p.name, p.id };
+
+                foreach (var p in programs)
+                {
+                    Button b = new Button();
+                    b.Name = "btnPri_" + p.id + "_" + parentId;
+                    b.Click += btnSec_Click;
+                    b.Content = p.name;
+                    b.Style = this.FindResource("btnUnselStyle") as Style;
+                    if (clickedBtn == p.id)
+                        b.Background = hlightLightBack;
+                    else
+                        b.Background = hlightBack;
+
+                    btnNavSec.Children.Add(b);
+                }
+            }
+        }
+
+        //context menu
+        private void showPopupMenu(string prov, string acronym)
+        {
+            if (selectedId == 0)
+                return;
+
+            ContextMenu c = new ContextMenu();
+            c.Style = this.FindResource("cxMenuStyle") as Style;
+            //title
+
+
+            using (var context = new cesEntities())
+            {
+                //demand for the province info
+                var provId = (from p in ces.provinces
+                              where p.acronym == acronym
+                              select p.id).First();
+
+                var demands = (from d in ces.job_demand
+                               where d.province_id == provId && d.program_id == selectedId
+                               select new { d.demand }).First();
+
+                Label l = new Label();
+                l.FontSize = 15;
+                l.FontWeight = FontWeights.Bold;
+                l.Foreground = new SolidColorBrush(Color.FromRgb(0, 25, 90));
+                l.Content = prov;
+
+                //title item
+                MenuItem mTitle = new MenuItem();
+                mTitle.Header = l;
+                mTitle.Background = new SolidColorBrush(Color.FromRgb(220, 240, 255));
+                mTitle.IsEnabled = false;
+
+                //new menu item
+                MenuItem dem = new MenuItem();
+
+                if (demands.demand > 0)
+                {
+                    dem.Header = "Demand: +" + demands.demand;
+                    dem.Background = new SolidColorBrush(Color.FromRgb(150, 200, 150));
+                }
+                else if (demands.demand < 0)
+                {
+                    dem.Header = "Demand: " + demands.demand;
+                    dem.Background = new SolidColorBrush(Color.FromRgb(200, 150, 150));
+                }
+                else {
+                    dem.Header = "Demand: 0";
+                    dem.Background = new SolidColorBrush(Color.FromRgb(200, 200, 200));
+                }
+                //add stuff 
+                c.Items.Add(mTitle);
+                c.Items.Add(dem);
+                c.Items.Add(new MenuItem().Header = "");
+
+            }
+
+
+            c.IsOpen = true;
+
+        }
+        //event handlers go here
+        private void btnSec_Click(object sender, RoutedEventArgs e) //first level of button on the map
+        {
+            Button b = (Button)sender;
+
+            Match m = new Regex(@"\d+").Match(b.Name);
+
+            selectedId = int.Parse(m.Value.ToString());
+
+            int parentId = int.Parse(m.NextMatch().Value);
+            map_buildSecMenu(parentId, selectedId);
+            map_clearColours();
+            map_ColourPrograms(selectedId);
+        }
+        private void btnPri_Click(object sender, RoutedEventArgs e)
+        {
+            selectedId = 0;
+
+            Button b = (Button)sender;   
+
+            Match m = new Regex(@"\d+").Match(b.Name);
+            int id = int.Parse(m.Value);
+
+            map_buildPriMenu(id);
+            map_buildSecMenu(id);
+            map_clearColours();
+        }//second level button on the map
+
+        //province colouring
+        //some provinces have islands
+        private void fillPe(SolidColorBrush c)
+        {
+            pei.Fill = c;
+        }
+        private void fillPq(SolidColorBrush c)
+        {
+            qc.Fill = c;
+            qc_qi.Fill = c;
+        }
+        private void fillNvt(SolidColorBrush c)
+        {
+            nv.Fill = c;
+            nv_ti10.Fill = c;
+            nv_ti2.Fill = c;
+            nv_ti3.Fill = c;
+            nv_ti4.Fill = c;
+            nv_ti5.Fill = c;
+            nv_ti6.Fill = c;
+            nv_ti7.Fill = c;
+            nv_ti8.Fill = c;
+            nv_ti9.Fill = c;
+            nv_tvi.Fill = c;
+            nv_bfi.Fill = c;
+            nv_ei.Fill = c;
+        }
+        private void fillBc(SolidColorBrush c)
+        {
+            bc.Fill = c;
+            bc_hg.Fill = c;
+        }
+        private void fillNwt(SolidColorBrush c)
+        {
+            nw.Fill = c;
+            nw_tv.Fill = c;
+            nw_bki.Fill = c;
+            nw_mi.Fill = c;
+            nw_ai.Fill = c;
+            nw_ai2.Fill = c;
+        }
+        private void fillYk(SolidColorBrush c)
+        {
+            yk.Fill = c;
+        }
+        private void fillNs(SolidColorBrush c)
+        {
+            ns.Fill = c;
+        }
+        private void fillNf(SolidColorBrush c)
+        {
+            nf.Fill = c;
+        }
+        private void fillNb(SolidColorBrush c)
+        {
+            nb.Fill = c;
+        }
+        private void fillOn(SolidColorBrush c)
+        {
+            on.Fill = c;
+        }
+        private void fillSk(SolidColorBrush c)
+        {
+            sk.Fill = c;
+        }
+        private void fillMb(SolidColorBrush c)
+        {
+            mb.Fill = c;
+        }
+        private void fillAb(SolidColorBrush c)
+        {
+            ab.Fill = c;
+        }
+
+
+
+  
+        //Provincial/Territory mousedown events
+        private void bc_MouseDown(object sender, MouseEventArgs e)
+        {
+            showPopupMenu("British Columbia", "bc");
+        }
+        private void yk_MouseDown(object sender, MouseEventArgs e)
+        {
+            showPopupMenu("Yukon", "yk");
+        }
+        private void ab_MouseDown(object sender, MouseEventArgs e)
+        {
+            showPopupMenu("Alberta", "ab");
+        }
+        private void sk_MouseDown(object sender, MouseEventArgs e)
+        {
+            showPopupMenu("Saskatchewan", "sk");
+        }
+        private void nwt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Northwest Territories", "nw");
+        }
+        private void pei_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Prince Edward Island", "pe");
+        }
+        private void nf_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Newfoundland and Labrador", "nf");
+        }
+        private void ns_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Nova Scotia", "ns");
+        }
+        private void nb_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("New Brunswick", "nb");
+        }
+        private void nvt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Nunavut", "nv");
+        }
+        private void pq_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Quebec", "qc");
+        }
+        private void mb_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Manitoba", "mb");
+        }
+        private void on_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            showPopupMenu("Ontario", "on");
+        }
+    }
+}
