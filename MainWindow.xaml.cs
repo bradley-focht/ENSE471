@@ -319,6 +319,14 @@ namespace WpfTest
             map_buildSecMenu(id);
             map_clearColours();
         }//second level button on the map
+        private void btnEducation_Click(object sender, RoutedEventArgs e)
+        {
+            dckMap.Visibility = Visibility.Collapsed;
+        }
+        private void btnMap_Click(object sender, RoutedEventArgs e)
+        {
+            dckMap.Visibility = Visibility.Visible;
+        }
 
         //province colouring
         //some provinces have islands
@@ -450,5 +458,7 @@ namespace WpfTest
         {
             showPopupMenu("Ontario", "on");
         }
+
+ 
     }
 }

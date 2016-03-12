@@ -23,7 +23,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="btnUnselStyle" TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5"/>
@@ -31,7 +31,13 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
     </Window.Resources>
-    <DockPanel Name="dckMain">
+    <DockPanel Name="dckMain" LastChildFill="True"> <!-- these buttons look like hell -->
+        <DockPanel Name="dckTopButtons" DockPanel.Dock="Top">
+            <Button Name="btnMap" Content="Analysis" Width="150" Click="btnMap_Click"/>
+            <Button Name="btnEducation" Content="Education Data"  Width="150" Click="btnEducation_Click" />
+            <Button Name="btnJobs" Content="Jobs Data" Width="150" />
+        </DockPanel>
+        <DockPanel Name="dckMap">
         <Border DockPanel.Dock="Top" BorderBrush="#0A2846" Background="#051423" BorderThickness="2" >
             <StackPanel Orientation="Horizontal" Name="btnSec" HorizontalAlignment="Center" />
         </Border>
@@ -195,6 +201,6 @@
             </FlowDocument>
         </FlowDocumentReader>
 
-
+        </DockPanel>
     </DockPanel>
 </Window>
