@@ -324,7 +324,20 @@ namespace WpfTest
                 //add stuff 
                 c.Items.Add(mTitle);
                 c.Items.Add(dem);
-                c.Items.Add(new MenuItem().Header = "");
+
+                //jobs data stuff
+                MenuItem m = new MenuItem();
+                MenuItem n = new MenuItem();
+                MenuItem o = new MenuItem();
+
+                m.Items.Add(n);
+                n.Items.Add(o);
+                m.Header = "want this job?";
+                n.Header = "go to this school";
+                o.Header = "here is some more info";
+                c.StaysOpen = true;
+
+                c.Items.Add(m);
 
             }
 
@@ -332,6 +345,9 @@ namespace WpfTest
             c.IsOpen = true;
 
         }
+
+
+
         //event handlers go here
         private void btnSec_Click(object sender, RoutedEventArgs e) //first level of button on the map
         {
