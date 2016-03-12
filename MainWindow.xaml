@@ -48,12 +48,15 @@
             </StackPanel>
         </DockPanel>
         <DockPanel Name="dckMap">
-      
+
         <Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2"  >
-            <StackPanel  Orientation="Vertical" Name="btnNavPri" HorizontalAlignment="Center" Width="100" />
-        </Border>
-        <Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="0, 0, 2, 2" >
-                <StackPanel Orientation="Vertical" Name="btnNavSec" HorizontalAlignment="Center" Width="100" />
+           <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Name="btnNavTitle" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel  Orientation="Vertical" Name="btnNavPri" HorizontalAlignment="Left" Width="100" />
+                        <StackPanel Orientation="Vertical" Name="btnNavSec" HorizontalAlignment="Left" Width="100" />
+                    </StackPanel>
+                </StackPanel>
         </Border>
         <Grid  Name="gridMap" Background="Black" Width="619">
 

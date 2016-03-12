@@ -54,6 +54,9 @@ namespace WpfTest
             //clear map of default colours
             map_clearColours();
 
+            //create title section (in code of course!)
+            map_buildPriMenuTitleSel();
+
         }
 
         //map functions
@@ -160,11 +163,6 @@ namespace WpfTest
                             fillNwt(c);
                             break;
                     }
-                        
-                    
-
-
-
                 }
             }
         }   
@@ -189,13 +187,18 @@ namespace WpfTest
 
         private void map_buildPriMenu(int clickedBtn=0)
         {
+            //clear the menu and start again
             btnNavPri.Children.Clear();
+
+               
+            //get data from the db
             using (var context = new cesEntities())
             {
                 var programs = from p in ces.programs
                                where p.parent == 0
                                select new { p.name, p.id };
 
+                //make the buttons
                 foreach (var p in programs)
                 {
                     Button b = new Button();
@@ -237,7 +240,36 @@ namespace WpfTest
                 }
             }
         }
+        private void map_buildPriMenuTitleSel()
+        {
+            //add a title... i guess use a button?
 
+            Button bTitle = new Button();
+            bTitle.Width = 100;
+            bTitle.Content = "Program";
+            bTitle.Style = this.FindResource("btnUnselStyle") as Style;
+            bTitle.Background = new SolidColorBrush(Color.FromRgb(40, 160, 255));
+            bTitle.ToolTip = "Select a province below, then click on the map to the right";
+
+            TextBlock t = new TextBlock();
+            t.Text = " Year ";
+            t.Width = 40;
+            t.VerticalAlignment = VerticalAlignment.Center;
+            t.Foreground = new SolidColorBrush(Color.FromRgb(250, 250, 125));
+            
+
+            ComboBox cmb = new ComboBox();
+            cmb.Name = "cmbYear";
+            cmb.Items.Add("2020");
+            cmb.Width = 60;
+            cmb.SelectedIndex = 0;
+            
+
+            btnNavTitle.Children.Add(bTitle);
+            btnNavTitle.Children.Add(t);
+            btnNavTitle.Children.Add(cmb);
+
+        }
         //context menu
         private void showPopupMenu(string prov, string acronym)
         {
