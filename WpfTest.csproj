@@ -166,6 +166,7 @@
       <DependentUpon>cesModel.edmx</DependentUpon>
       <LastGenOutput>cesModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="logo.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

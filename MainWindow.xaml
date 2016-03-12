@@ -31,29 +31,31 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
     </Window.Resources>
-    <DockPanel Name="dckMain" LastChildFill="True"> <!-- these buttons look like hell -->
+    <DockPanel Name="dckMain" HorizontalAlignment="Center" LastChildFill="True"> <!-- these buttons look like hell -->
         <DockPanel Name="dckTopButtons" DockPanel.Dock="Top">
-            <Button Name="btnMap" Content="Analysis" Width="150" Click="btnMap_Click"/>
-            <Button Name="btnEducation" Content="Education Data"  Width="150" Click="btnEducation_Click" />
-            <Button Name="btnJobs" Content="Jobs Data" Width="150" />
+            <Image Source="logo.gif" Height="60" Width="60" />
+            <StackPanel Orientation="Vertical" Width="100">
+                <TextBlock x:Name="subHeaderText" Text="Canadian Education Strategy " FontSize="18" TextWrapping="Wrap" Foreground="Red" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="450">
+            <Button Name="btnMap" Content="Analysis" Width="150" Height="30" Click="btnMap_Click"/>
+            <Button Name="btnEducation" Content="Education Data"  Width="150" Height="30" Click="btnEducation_Click" />
+            <Button Name="btnJobs" Content="Jobs Data" Width="150" Height="30" Click="btnJobs_Click" />
+            </StackPanel>
+            <StackPanel Name="stckLogin" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center">
+                <TextBlock Text="You are logged in as Sean Bozcaluk" Foreground="White" HorizontalAlignment="Right"></TextBlock>
+                <TextBlock Text="Log out" HorizontalAlignment="Right" Foreground="Wheat" />
+            </StackPanel>
         </DockPanel>
         <DockPanel Name="dckMap">
-        <Border DockPanel.Dock="Top" BorderBrush="#0A2846" Background="#051423" BorderThickness="2" >
-            <StackPanel Orientation="Horizontal" Name="btnSec" HorizontalAlignment="Center" />
-        </Border>
-
-
-        <Grid  Name="gridLogin" Background="Black" Visibility="Visible">
-            
-        </Grid>
-        
+      
         <Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2"  >
-            <StackPanel  Orientation="Vertical" Name="btnNavPri" HorizontalAlignment="Center" />
+            <StackPanel  Orientation="Vertical" Name="btnNavPri" HorizontalAlignment="Center" Width="100" />
         </Border>
         <Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="0, 0, 2, 2" >
-            <StackPanel Orientation="Vertical" Name="btnNavSec" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Vertical" Name="btnNavSec" HorizontalAlignment="Center" Width="100" />
         </Border>
-        <Grid  Name="gridMap" Background="Black">
+        <Grid  Name="gridMap" Background="Black" Width="619">
 
             <Polygon Name="bc"  MouseDown="bc_MouseDown" Points="21, 196 113, 252 86, 317 91, 326 109, 369 106, 379 108, 386 43, 359 36, 349 37, 342 31, 336 32, 351 38, 357 37, 364 28, 356 25, 354 16, 333 19, 330 16, 323 19, 323 29, 335 30, 331 23, 325 27, 310 28, 299 22, 300 30, 292 25, 292 26, 280 38, 264 33, 252 35, 230 33, 210 25, 212 21, 211 " Fill="Blue" />
                         <Polygon Name="bc_hg" MouseDown="bc_MouseDown" Points="11, 272 12, 276 16, 277 8, 285 11, 288 8, 289 7, 298 5, 298 4, 287 5, 277" Fill="Blue" />

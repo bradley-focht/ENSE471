@@ -80,10 +80,10 @@ namespace WpfTest
                     if (d.demand < 0)
                     {
                         if (d.demand <= -50)
-                            r = (byte)(400 + d.demand * 3);
-                        else if (d.demand > -50)
+                            r = (byte)(300 + d.demand * 2);
+                        else if (d.demand > -50 && d.demand < 0)
                         {
-                            r = 150;
+                            r = 200;
                         }
                     } else if (d.demand > 50)
                     {
@@ -92,11 +92,11 @@ namespace WpfTest
 
                     //BLUE
                    if (d.demand < -50) {                       
-                            b = (byte)(-100 - (2*d.demand));
+                            b = 100;
                     }
                     else if (d.demand > 50)
                     {
-                        g = (byte)(-50 + d.demand);
+                        g = (byte)(-100 + d.demand*2);
                     }
 
 
@@ -104,6 +104,14 @@ namespace WpfTest
                     if (d.demand >0)
                     {
                         g = (byte)(100 + 1.05*d.demand);   
+                    } else if (d.demand < 0 && d.demand > -50) {
+                        g = (byte)(50 + d.demand * 2);
+                    }
+
+                    //demand == 0
+                    if (d.demand == 0)
+                    {
+                        r = g = b = 200;
                     }
 
                     
@@ -327,6 +335,10 @@ namespace WpfTest
         {
             dckMap.Visibility = Visibility.Visible;
         }
+        private void btnJobs_Click(object sender, RoutedEventArgs e)
+        {
+            dckMap.Visibility = Visibility.Collapsed;
+        }
 
         //province colouring
         //some provinces have islands
@@ -459,6 +471,6 @@ namespace WpfTest
             showPopupMenu("Ontario", "on");
         }
 
- 
+
     }
 }
