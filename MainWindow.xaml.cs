@@ -56,7 +56,7 @@ namespace WpfTest
  
             //grid margin 
             gridMap.Margin = new Thickness(10, 10, 10, 10);
-            gridMap.Background = new  SolidColorBrush(Color.FromRgb(5, 20, 35));
+            dckMain.Background =defaultBack;
 
             //build menu
             map_buildPriMenu();

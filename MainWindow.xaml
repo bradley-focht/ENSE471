@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Canadian Education Strategy" Height="590" Width="1100" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+        Title="Canadian Education Strategy" Height="620" Width="1200" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
     <Window.Resources>
         <Style x:Key="cxMenuStyle" TargetType="{x:Type ContextMenu}">
             <Setter Property="Background" Value="White"/>
@@ -31,8 +31,8 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
     </Window.Resources>
-    <DockPanel Name="dckMain" HorizontalAlignment="Center" LastChildFill="True"> <!-- these buttons look like crap -->
-        <DockPanel Name="dckTopButtons" DockPanel.Dock="Top">
+    <DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
+        <DockPanel Name="dckTopButtons" DockPanel.Dock="Top"> <!-- these buttons look like crap -->
             <Image Source="logo.gif" Height="60" Width="60" />
             <StackPanel Orientation="Vertical" Width="100">
                 <TextBlock x:Name="subHeaderText" Text="Canadian Education Strategy " FontSize="18" TextWrapping="Wrap" Foreground="Red" />
@@ -126,11 +126,11 @@
 
         </DockPanel>
 
-        <DockPanel Name="dckLogin" VerticalAlignment="Center" Visibility="Collapsed">
+        <DockPanel Name="dckLogin" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
          
             <StackPanel Orientation="Vertical">
                 <Image Source="logo.gif" Height="100" Width="100" />
-                <TextBlock  Foreground="Wheat" Margin="5" FontSize="20">Welcome to the Canadian Education Strategy Program</TextBlock>
+                <TextBlock  Foreground="Wheat" Margin="5" FontSize="20">Canadian Education Strategy Program</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" Margin="10" >
                         <TextBlock Foreground="Wheat" Margin="5" FontSize="15" HorizontalAlignment="Right">Username</TextBlock>
@@ -139,9 +139,9 @@
                     <StackPanel Orientation="Vertical" Margin="10" >
                         <TextBox Name="txtUsername" Width="200" Margin="5" HorizontalAlignment="Left"/>
                         <TextBox Name="txtPassword" Width="200" Margin="5" HorizontalAlignment="Left"/>
-                        <Button  Name="btnLogin" HorizontalAlignment="Left" Click="btnLogin_Click" Content="Login" Width="100" />
-                        <TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="1">Can't login? Call Sean at 123-456.</TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="1">Can't get ahold of him? Try his mom at 321-7654</TextBlock>
+                        <Button  Name="btnLogin" HorizontalAlignment="Left" Margin="5" Content="Login" Width="100" Click="btnLogin_Click"  />
+                        <TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="5">Can't login? Call Sean at 123-456.</TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="5">Can't get ahold of him? Try his mom at 321-7654</TextBlock>
                     </StackPanel>
                     
                 </StackPanel>
