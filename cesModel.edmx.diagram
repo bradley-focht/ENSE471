@@ -16,7 +16,11 @@
         <AssociationConnector Association="cesModel.job_dem_fiel" ManuallyRouted="false" />
         <AssociationConnector Association="cesModel.job_dem_prog" ManuallyRouted="false" />
         <AssociationConnector Association="cesModel.job_dem_prov" ManuallyRouted="false" />
-        <AssociationConnector Association="cesModel.job_req_field" ManuallyRouted="false" />
+        <AssociationConnector Association="cesModel.job_req_field" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="7.890625" />
+          <ConnectorPoint PointX="6.18266522674963" PointY="7.890625" />
+          <ConnectorPoint PointX="6.18266522674963" PointY="6.7302864583333326" />
+        </AssociationConnector>
         <AssociationConnector Association="cesModel.job_req_prog" ManuallyRouted="false" />
         <AssociationConnector Association="cesModel.prog_id" ManuallyRouted="false" />
         <AssociationConnector Association="cesModel.prov_uni_id" ManuallyRouted="false" />

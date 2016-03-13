@@ -39,14 +39,23 @@ namespace WpfTest
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ces = new cesEntities();        
+            ces = new cesEntities();
+
+            //initial screen setup ... such a bad way of doing it
+            dckLogin.Visibility = Visibility.Visible;
+            
+            dckMap.Visibility = Visibility.Collapsed;
+            dckTopButtons.Visibility = Visibility.Collapsed;
+            btnNavPri.Visibility = Visibility.Collapsed;
+            btnNavSec.Visibility = Visibility.Collapsed;
+            btnNavTitle.Visibility = Visibility.Collapsed;
 
             //set background colour
             dckMain.Background = defaultBack;
             selectedId = 0;
  
             //grid margin 
-            gridMap.Margin = new Thickness(50, 10, 50, 10);
+            gridMap.Margin = new Thickness(10, 10, 10, 10);
             gridMap.Background = new  SolidColorBrush(Color.FromRgb(5, 20, 35));
 
             //build menu
@@ -57,6 +66,8 @@ namespace WpfTest
             //create title section (in code of course!)
             map_buildPriMenuTitleSel();
 
+            //clear the table
+            table_buildCanadaWideAggregation();
         }
 
         //map functions
@@ -185,6 +196,7 @@ namespace WpfTest
             fillYk(nearWhite);
         }   //clear the whole map
 
+
         private void map_buildPriMenu(int clickedBtn=0)
         {
             //clear the menu and start again
@@ -269,6 +281,27 @@ namespace WpfTest
             btnNavTitle.Children.Add(t);
             btnNavTitle.Children.Add(cmb);
 
+        }
+
+        //table in top right corner
+        //sending a zero hides the table - still takes up the space, not collapsed
+        private void table_buildCanadaWideAggregation(int progId=0) {
+            if (progId == 0) {
+                Section s = new Section();
+                Paragraph p0 = new Paragraph(new Run("Canada Education Stragy"));
+                Paragraph p1 = new Paragraph(new Run("Select program then click on the provinces to view information"));
+                Paragraph p2 = new Paragraph(new Run("Other useful info..... hardcoded in"));
+                Paragraph p3 = new Paragraph(new Run("cause there is no better way..."));
+                p0.Foreground = p1.Foreground = p2.Foreground = p3.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 100));
+                p0.FontSize += 10;
+                s.Blocks.Add(p0);
+                s.Blocks.Add(p1);
+                s.Blocks.Add(p2);
+                s.Blocks.Add(p3);
+                s.TextAlignment = TextAlignment.Left;
+                flowDoc.Blocks.Add(s);
+            }
+            
         }
         //context menu
         private void showPopupMenu(string prov, string acronym)
@@ -386,6 +419,16 @@ namespace WpfTest
         private void btnJobs_Click(object sender, RoutedEventArgs e)
         {
             dckMap.Visibility = Visibility.Collapsed;
+        }
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            dckLogin.Visibility = Visibility.Collapsed;
+
+            dckMap.Visibility = Visibility.Visible;
+            dckTopButtons.Visibility = Visibility.Visible;
+            btnNavPri.Visibility = Visibility.Visible;
+            btnNavSec.Visibility = Visibility.Visible;
+            btnNavTitle.Visibility = Visibility.Visible;
         }
 
         //province colouring

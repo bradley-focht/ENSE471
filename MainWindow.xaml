@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Canadian Education Strategy" Height="570" Width="1200" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+        Title="Canadian Education Strategy" Height="590" Width="1100" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
     <Window.Resources>
         <Style x:Key="cxMenuStyle" TargetType="{x:Type ContextMenu}">
             <Setter Property="Background" Value="White"/>
@@ -31,7 +31,7 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
     </Window.Resources>
-    <DockPanel Name="dckMain" HorizontalAlignment="Center" LastChildFill="True"> <!-- these buttons look like hell -->
+    <DockPanel Name="dckMain" HorizontalAlignment="Center" LastChildFill="True"> <!-- these buttons look like crap -->
         <DockPanel Name="dckTopButtons" DockPanel.Dock="Top">
             <Image Source="logo.gif" Height="60" Width="60" />
             <StackPanel Orientation="Vertical" Width="100">
@@ -58,9 +58,9 @@
                     </StackPanel>
                 </StackPanel>
         </Border>
-        <Grid  Name="gridMap" Background="Black" Width="619">
+        <Grid  Name="gridMap" Background="Black" Width="590">
 
-            <Polygon Name="bc"  MouseDown="bc_MouseDown" Points="21, 196 113, 252 86, 317 91, 326 109, 369 106, 379 108, 386 43, 359 36, 349 37, 342 31, 336 32, 351 38, 357 37, 364 28, 356 25, 354 16, 333 19, 330 16, 323 19, 323 29, 335 30, 331 23, 325 27, 310 28, 299 22, 300 30, 292 25, 292 26, 280 38, 264 33, 252 35, 230 33, 210 25, 212 21, 211 " Fill="Blue" />
+                <Polygon Name="bc"  MouseDown="bc_MouseDown" Points="21, 196 113, 252 86, 317 91, 326 109, 369 106, 379 108, 386 43, 359 36, 349 37, 342 31, 336 32, 351 38, 357 37, 364 28, 356 25, 354 16, 333 19, 330 16, 323 19, 323 29, 335 30, 331 23, 325 27, 310 28, 299 22, 300 30, 292 25, 292 26, 280 38, 264 33, 252 35, 230 33, 210 25, 212 21, 211 " Fill="Blue" />
                         <Polygon Name="bc_hg" MouseDown="bc_MouseDown" Points="11, 272 12, 276 16, 277 8, 285 11, 288 8, 289 7, 298 5, 298 4, 287 5, 277" Fill="Blue" />
 
                         <Polygon  Name="yk" MouseDown="yk_MouseDown" Points="85, 106 90, 114 94, 123 81, 141 90, 147 85, 158 89, 161 82, 171 82, 179 86, 188 80, 208 84, 227 94, 231 97, 243 21, 197 22, 192 14, 184 85, 106" Fill="RosyBrown" />
@@ -108,7 +108,7 @@
                         <Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
                     </Grid>
 
-        <FlowDocumentReader Name="flowStats" ViewingMode="Page" MinZoom="100" IsFindEnabled ="False" IsScrollViewEnabled="False" IsTwoPageViewEnabled="False"  UseLayoutRounding="True" SnapsToDevicePixels="True" DockPanel.Dock="Right">
+        <FlowDocumentReader Name="flowStats" ViewingMode="Page" MinZoom="100" IsFindEnabled ="False" IsScrollViewEnabled="True" IsTwoPageViewEnabled="False"  UseLayoutRounding="True" DockPanel.Dock="Right" Width="225" Margin="10">
             <FlowDocumentReader.Resources>
                 <Style TargetType="TableCell">
                     <Setter Property="TextAlignment" Value="Center"/>
@@ -118,93 +118,35 @@
                     
                 </Style>
             </FlowDocumentReader.Resources>
-            <FlowDocument>
+            <FlowDocument Name="flowDoc">
                 
-                <Table Padding="4">
-                    <Table.Columns>
-                        <TableColumn/>
-                        <TableColumn/>
-                    </Table.Columns>
-                    <TableRowGroup>
-                        <TableRow>
-                            <TableCell ColumnSpan="2" BorderBrush="White" BorderThickness="1">
-                                <Paragraph FontWeight="Bold" FontSize="16">Canada Wide (50years)</Paragraph>
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1">
-                                <Paragraph FontWeight="Bold" FontSize="14">Field</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="1,1,1,1">
-                                <Paragraph FontWeight="Bold"  FontSize="14">Prospects</Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,1,1,1">
-                                <Paragraph>Software</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#33CC33">
-                                <Paragraph>+20%</Paragraph>
-                            </TableCell>
-
-                        </TableRow>
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,0,1,1" TextAlignment="Center">
-                                <Paragraph>Environmental</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#339933">
-                                <Paragraph>+19%</Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,0,1,1" TextAlignment="Center">
-                                <Paragraph>Electronics</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#336033">
-                                <Paragraph>+8%</Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,0,1,1" TextAlignment="Center">
-                                <Paragraph>Industrial</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#334633">
-                                <Paragraph>+4%</Paragraph>
-                            </TableCell>
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,0,1,1" TextAlignment="Center">
-                                <Paragraph>Civil</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#660000">
-                                <Paragraph>-2%</Paragraph>
-                            </TableCell>
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,0,1,1" TextAlignment="Center">
-                                <Paragraph>Chemical</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#990000">
-                                <Paragraph>-18%</Paragraph>
-                            </TableCell>
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell BorderBrush="White" BorderThickness="1,0,1,1" TextAlignment="Center">
-                                <Paragraph>Petroleum</Paragraph>
-                            </TableCell>
-                            <TableCell BorderBrush="White" BorderThickness="0,0,1,1" Background="#FF0000">
-                                <Paragraph>-89%</Paragraph>
-                            </TableCell>
-                        </TableRow>
-                    </TableRowGroup>
-                </Table>
+   
             </FlowDocument>
         </FlowDocumentReader>
+
+        </DockPanel>
+
+        <DockPanel Name="dckLogin" VerticalAlignment="Center" Visibility="Collapsed">
+         
+            <StackPanel Orientation="Vertical">
+                <Image Source="logo.gif" Height="100" Width="100" />
+                <TextBlock  Foreground="Wheat" Margin="5" FontSize="20">Welcome to the Canadian Education Strategy Program</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Margin="10" >
+                        <TextBlock Foreground="Wheat" Margin="5" FontSize="15" HorizontalAlignment="Right">Username</TextBlock>
+                        <TextBlock  Foreground="Wheat" Margin="5" FontSize="15" HorizontalAlignment="Right">Password</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10" >
+                        <TextBox Name="txtUsername" Width="200" Margin="5" HorizontalAlignment="Left"/>
+                        <TextBox Name="txtPassword" Width="200" Margin="5" HorizontalAlignment="Left"/>
+                        <Button  Name="btnLogin" HorizontalAlignment="Left" Click="btnLogin_Click" Content="Login" Width="100" />
+                        <TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="1">Can't login? Call Sean at 123-456.</TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="1">Can't get ahold of him? Try his mom at 321-7654</TextBlock>
+                    </StackPanel>
+                    
+                </StackPanel>
+ 
+            </StackPanel>
 
         </DockPanel>
     </DockPanel>
