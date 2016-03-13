@@ -360,8 +360,11 @@ namespace WpfTest
 
                 //jobs data stuff
                 MenuItem m = new MenuItem();
+               
                 MenuItem n = new MenuItem();
+                n.Style = this.FindResource("cxMenuItemStyle") as Style;
                 MenuItem o = new MenuItem();
+                o.Style = this.FindResource("cxMenuItemStyle") as Style;
 
                 m.Items.Add(n);
                 n.Items.Add(o);
