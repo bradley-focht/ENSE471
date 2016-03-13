@@ -287,11 +287,12 @@ namespace WpfTest
         private void table_buildCanadaWideAggregation(int progId=0) {
             if (progId == 0) {
                 Section s = new Section();
-                Paragraph p0 = new Paragraph(new Run("Canada Education Stragy"));
+                Paragraph p0 = new Paragraph(new Run("Canada Education Strategy"));
                 Paragraph p1 = new Paragraph(new Run("Select program then click on the provinces to view information"));
                 Paragraph p2 = new Paragraph(new Run("Other useful info..... hardcoded in"));
                 Paragraph p3 = new Paragraph(new Run("cause there is no better way..."));
-                p0.Foreground = p1.Foreground = p2.Foreground = p3.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 100));
+                p0.Foreground = new SolidColorBrush(Color.FromRgb(250, 250, 125));
+                p1.Foreground = p2.Foreground = p3.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 100));
                 p0.FontSize += 10;
                 s.Blocks.Add(p0);
                 s.Blocks.Add(p1);
