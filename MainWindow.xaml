@@ -41,18 +41,21 @@
     </Window.Resources>
     <DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
         <DockPanel Name="dckTopButtons" DockPanel.Dock="Top"> <!-- these buttons look like crap -->
-            <Image Source="logo.gif" Height="60" Width="60" />
-            <StackPanel Orientation="Vertical" Width="100">
-                <TextBlock x:Name="subHeaderText" Text="Canadian Education Strategy " FontSize="18" TextWrapping="Wrap" Foreground="Red" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Width="450">
-            <Button Name="btnMap" Content="Analysis" Width="150" Height="30" Click="btnMap_Click"/>
-            <Button Name="btnEducation" Content="Education Data"  Width="150" Height="30" Click="btnEducation_Click" />
-            <Button Name="btnJobs" Content="Jobs Data" Width="150" Height="30" Click="btnJobs_Click" />
-            </StackPanel>
-            <StackPanel Name="stckLogin" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center">
-                <TextBlock Text="You are logged in as Sean Bozcaluk" Foreground="White" HorizontalAlignment="Right"></TextBlock>
-                <TextBlock Text="Log out" HorizontalAlignment="Right" Foreground="Wheat" />
+            <StackPanel Orientation="Horizontal">
+                <Image Source="logo.gif" Height="60" Width="60" />
+                <StackPanel Orientation="Vertical" Width="100">
+                    <TextBlock x:Name="subHeaderText" FontWeight="DemiBold" Text="Canadian Education Strategy " FontSize="18" TextWrapping="Wrap" Foreground="Red" />
+                </StackPanel>
+                <StackPanel Width="200" /> <!-- force space -->
+                <StackPanel Orientation="Horizontal" Width="600" HorizontalAlignment="Center">
+                    <Button Name="btnMap" Content="Analysis" Width="150" Height="30" Click="btnMap_Click"/>
+                    <Button Name="btnEducation" Content="Education Data"  Width="150" Height="30" Click="btnEducation_Click" />
+                    <Button Name="btnJobs" Content="Jobs Data" Width="150" Height="30" Click="btnJobs_Click" />
+                </StackPanel>
+                <StackPanel Name="stckLogin" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center">
+                    <TextBlock Text="You are logged in as Sean Bozcaluk" Foreground="White" HorizontalAlignment="Right"></TextBlock>
+                    <TextBlock Text="Log out" HorizontalAlignment="Right" Foreground="Wheat" />
+                </StackPanel>
             </StackPanel>
         </DockPanel>
         <DockPanel Name="dckMap">
@@ -138,7 +141,7 @@
          
             <StackPanel Orientation="Vertical">
                 <Image Source="logo.gif" Height="100" Width="100" />
-                <TextBlock  Foreground="Wheat" Margin="5" FontSize="20">Canadian Education Strategy Program</TextBlock>
+                <TextBlock  Foreground="White" Margin="5" FontSize="20">Canadian Education Strategy Program</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" Margin="10" >
                         <TextBlock Foreground="Wheat" Margin="5" FontSize="15" HorizontalAlignment="Right">Username</TextBlock>

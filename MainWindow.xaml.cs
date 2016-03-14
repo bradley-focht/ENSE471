@@ -46,9 +46,6 @@ namespace WpfTest
             
             dckMap.Visibility = Visibility.Collapsed;
             dckTopButtons.Visibility = Visibility.Collapsed;
-            btnNavPri.Visibility = Visibility.Collapsed;
-            btnNavSec.Visibility = Visibility.Collapsed;
-            btnNavTitle.Visibility = Visibility.Collapsed;
 
             //set background colour
             dckMain.Background = defaultBack;
@@ -509,9 +506,6 @@ namespace WpfTest
             ab.Fill = c;
         }
 
-
-
-  
         //Provincial/Territory mousedown events
         private void bc_MouseDown(object sender, MouseEventArgs e)
         {
@@ -565,7 +559,5 @@ namespace WpfTest
         {
             showPopupMenu("Ontario", "on");
         }
-
-
     }
 }
