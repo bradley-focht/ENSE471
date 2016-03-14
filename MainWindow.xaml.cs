@@ -69,6 +69,17 @@ namespace WpfTest
 
 			//clear the table
 			table_buildCanadaWideAggregation();
+
+			BuildDataEntryGrids();
+		}
+
+		/// <summary>
+		/// Does anything needed to initialize the data entry grids
+		/// </summary>
+		private void BuildDataEntryGrids()
+		{
+			cmbUniversity.Items.Add("2020");
+			cmbUniversity.Items.Add("2050");
 		}
 
 		//map functions
@@ -203,7 +214,7 @@ namespace WpfTest
 			//clear the menu and start again
 			btnNavPri.Children.Clear();
 
-			   
+
 			//get data from the db
 			using (var context = new cesEntities())
 			{
@@ -384,7 +395,45 @@ namespace WpfTest
 
 		}
 
+		/// <summary>
+		/// Shows the screen corresponding to the sender of the event.
+		/// All screen panels hide initially then the correct screen becomes visible
+		/// 
+		/// The DataEntry dockpanel contains both the Education and Jobs Grid and shares 
+		/// the left hand navigation bar
+		/// </summary>
+		/// <param name="sender">Object sending the event</param>
+		private void ShowScreen(object sender)
+		{
+			dckLogin.Visibility = Visibility.Collapsed;
+			dckMap.Visibility = Visibility.Collapsed;
+			dckDataEntry.Visibility = Visibility.Collapsed;
+			grdEducation.Visibility = Visibility.Collapsed;
+			grdJobs.Visibility = Visibility.Collapsed;
 
+			if (sender.Equals(btnEducation))
+			{
+				dckDataEntry.Visibility = Visibility.Visible;
+				grdEducation.Visibility = Visibility.Visible;
+			}
+			else if (sender.Equals(btnMap))
+			{
+				dckMap.Visibility = Visibility.Visible;
+			}
+			else if (sender.Equals(btnJobs))
+			{
+				dckDataEntry.Visibility = Visibility.Visible;
+				grdJobs.Visibility = Visibility.Visible;
+			}
+			else if (sender.Equals(btnLogin))
+			{
+				dckMap.Visibility = Visibility.Visible;
+				dckTopButtons.Visibility = Visibility.Visible;
+				btnNavPri.Visibility = Visibility.Visible;
+				btnNavSec.Visibility = Visibility.Visible;
+				btnNavTitle.Visibility = Visibility.Visible;
+			}
+		}
 
 		//event handlers go here
 		private void btnSec_Click(object sender, RoutedEventArgs e) //first level of button on the map
@@ -413,27 +462,15 @@ namespace WpfTest
 			map_buildSecMenu(id);
 			map_clearColours();
 		}//second level button on the map
-		private void btnEducation_Click(object sender, RoutedEventArgs e)
-		{
-			dckMap.Visibility = Visibility.Collapsed;
-		}
-		private void btnMap_Click(object sender, RoutedEventArgs e)
-		{
-			dckMap.Visibility = Visibility.Visible;
-		}
-		private void btnJobs_Click(object sender, RoutedEventArgs e)
-		{
-			dckMap.Visibility = Visibility.Collapsed;
-		}
-		private void btnLogin_Click(object sender, RoutedEventArgs e)
-		{
-			dckLogin.Visibility = Visibility.Collapsed;
 
-			dckMap.Visibility = Visibility.Visible;
-			dckTopButtons.Visibility = Visibility.Visible;
-			btnNavPri.Visibility = Visibility.Visible;
-			btnNavSec.Visibility = Visibility.Visible;
-			btnNavTitle.Visibility = Visibility.Visible;
+		/// <summary>
+		/// Event for buttons in the primary navigation (and LogIn) being selected
+		/// </summary>
+		/// <param name="sender">Button sending the event</param>
+		/// <param name="e"></param>
+		private void ChangeScreen(object sender, RoutedEventArgs e)
+		{
+			ShowScreen(sender);
 		}
 
 		//province colouring
@@ -567,6 +604,79 @@ namespace WpfTest
 			showPopupMenu("Ontario", "on");
 		}
 
+		/// <summary>
+		/// Attempts to save job data to the database
+		/// Prompt displayed showing save status
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void SubmitJobsData(object sender, RoutedEventArgs e)
+		{
+			bool saved = false;
 
+			//TODO: Do stuff for submitting Jobs Query
+
+			if (saved)
+			{
+				MessageBox.Show("Success!");
+				ClearJobsData(sender, e);
+			}
+			else
+				MessageBox.Show("Error Saving Data.");
+		}
+
+		/// <summary>
+		/// Clears all fields in the jobs grid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ClearJobsData(object sender, RoutedEventArgs e)
+		{
+			cmbDiscipline.SelectedItem = null;
+			cmbField.SelectedItem = null;
+			cmbProjection.SelectedItem = null;
+			rdUp.IsChecked = false;
+			rdDown.IsChecked = false;
+			txtForecast.Text = String.Empty;
+			txtCurrentEmployment.Text = String.Empty;
+			txtAverageSalary.Text = String.Empty;
+		}
+
+		/// <summary>
+		/// Attempts to save education data to database.
+		/// Prompt displayed showing save status.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void SubmitEducationData(object sender, RoutedEventArgs e)
+		{
+			bool saved = false;
+
+			//TODO: Do stuff for submitting Education Query
+
+			if (saved)
+			{
+				MessageBox.Show("Success!");
+				ClearEducationData(sender, e);
+			}
+			else
+				MessageBox.Show("Error Saving Data.");
+		}
+
+		/// <summary>
+		/// Clears all fields in the education grid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ClearEducationData(object sender, RoutedEventArgs e)
+		{
+			cmbUniversity.SelectedItem = null;
+			txtRelatedProgram.Text = String.Empty;
+			txtSeats.Text = String.Empty;
+			txtCurrentEnrollment.Text = String.Empty;
+			txtGraduatesPerYear.Text = String.Empty;
+			txtJobAttainment.Text = String.Empty;
+			txtTuition.Text = String.Empty;
+		}
 	}
 }

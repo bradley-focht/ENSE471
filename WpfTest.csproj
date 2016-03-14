@@ -68,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>cesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="job_demand.cs">
       <DependentUpon>cesModel.tt</DependentUpon>
     </Compile>
