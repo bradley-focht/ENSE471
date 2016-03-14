@@ -403,7 +403,7 @@ namespace WpfTest
 		/// the left hand navigation bar
 		/// </summary>
 		/// <param name="sender">Object sending the event</param>
-		private void showScreen(object sender)
+		private void ShowScreen(object sender)
 		{
 			dckLogin.Visibility = Visibility.Collapsed;
 			dckMap.Visibility = Visibility.Collapsed;
@@ -468,9 +468,9 @@ namespace WpfTest
 		/// </summary>
 		/// <param name="sender">Button sending the event</param>
 		/// <param name="e"></param>
-		private void screenChange(object sender, RoutedEventArgs e)
+		private void ChangeScreen(object sender, RoutedEventArgs e)
 		{
-			showScreen(sender);
+			ShowScreen(sender);
 		}
 
 		//province colouring
@@ -604,13 +604,32 @@ namespace WpfTest
 			showPopupMenu("Ontario", "on");
 		}
 
-
+		/// <summary>
+		/// Attempts to save job data to the database
+		/// Prompt displayed showing save status
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SubmitJobsData(object sender, RoutedEventArgs e)
 		{
+			bool saved = false;
+
 			//TODO: Do stuff for submitting Jobs Query
 
+			if (saved)
+			{
+				MessageBox.Show("Success!");
+				ClearJobsData(sender, e);
+			}
+			else
+				MessageBox.Show("Error Saving Data.");
 		}
 
+		/// <summary>
+		/// Clears all fields in the jobs grid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ClearJobsData(object sender, RoutedEventArgs e)
 		{
 			cmbDiscipline.SelectedItem = null;
@@ -623,12 +642,32 @@ namespace WpfTest
 			txtAverageSalary.Text = String.Empty;
 		}
 
+		/// <summary>
+		/// Attempts to save education data to database.
+		/// Prompt displayed showing save status.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SubmitEducationData(object sender, RoutedEventArgs e)
 		{
+			bool saved = false;
+
 			//TODO: Do stuff for submitting Education Query
 
+			if (saved)
+			{
+				MessageBox.Show("Success!");
+				ClearEducationData(sender, e);
+			}
+			else
+				MessageBox.Show("Error Saving Data.");
 		}
 
+		/// <summary>
+		/// Clears all fields in the education grid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ClearEducationData(object sender, RoutedEventArgs e)
 		{
 			cmbUniversity.SelectedItem = null;
