@@ -203,7 +203,7 @@ namespace WpfTest
 			//clear the menu and start again
 			btnNavPri.Children.Clear();
 
-			   
+
 			//get data from the db
 			using (var context = new cesEntities())
 			{
@@ -384,7 +384,39 @@ namespace WpfTest
 
 		}
 
+		/// <summary>
+		/// Shows the screen corresponding to the sender of the event.
+		/// All screen panels hide initially then the correct screen becomes visible
+		/// </summary>
+		/// <param name="sender">Object sending the event</param>
+		private void showScreen(object sender)
+		{
+			dckLogin.Visibility = Visibility.Collapsed;
+			dckMap.Visibility = Visibility.Collapsed;
+			dckJobs.Visibility = Visibility.Collapsed;
+			dckEducation.Visibility = Visibility.Collapsed;
 
+			if (sender.Equals(btnEducation))
+			{
+				dckEducation.Visibility = Visibility.Visible;
+			}
+			else if (sender.Equals(btnMap))
+			{
+				dckMap.Visibility = Visibility.Visible;
+			}
+			else if (sender.Equals(btnJobs))
+			{
+				dckJobs.Visibility = Visibility.Visible;
+			}
+			else if (sender.Equals(btnLogin))
+			{
+				dckMap.Visibility = Visibility.Visible;
+				dckTopButtons.Visibility = Visibility.Visible;
+				btnNavPri.Visibility = Visibility.Visible;
+				btnNavSec.Visibility = Visibility.Visible;
+				btnNavTitle.Visibility = Visibility.Visible;
+			}
+		}
 
 		//event handlers go here
 		private void btnSec_Click(object sender, RoutedEventArgs e) //first level of button on the map
@@ -413,27 +445,15 @@ namespace WpfTest
 			map_buildSecMenu(id);
 			map_clearColours();
 		}//second level button on the map
-		private void btnEducation_Click(object sender, RoutedEventArgs e)
-		{
-			dckMap.Visibility = Visibility.Collapsed;
-		}
-		private void btnMap_Click(object sender, RoutedEventArgs e)
-		{
-			dckMap.Visibility = Visibility.Visible;
-		}
-		private void btnJobs_Click(object sender, RoutedEventArgs e)
-		{
-			dckMap.Visibility = Visibility.Collapsed;
-		}
-		private void btnLogin_Click(object sender, RoutedEventArgs e)
-		{
-			dckLogin.Visibility = Visibility.Collapsed;
 
-			dckMap.Visibility = Visibility.Visible;
-			dckTopButtons.Visibility = Visibility.Visible;
-			btnNavPri.Visibility = Visibility.Visible;
-			btnNavSec.Visibility = Visibility.Visible;
-			btnNavTitle.Visibility = Visibility.Visible;
+		/// <summary>
+		/// Event for buttons in the primary navigation (and LogIn) being selected
+		/// </summary>
+		/// <param name="sender">Button sending the event</param>
+		/// <param name="e"></param>
+		private void screenChange(object sender, RoutedEventArgs e)
+		{
+			showScreen(sender);
 		}
 
 		//province colouring
