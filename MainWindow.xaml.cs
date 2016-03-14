@@ -69,6 +69,17 @@ namespace WpfTest
 
 			//clear the table
 			table_buildCanadaWideAggregation();
+
+			BuildDataEntryGrids();
+		}
+
+		/// <summary>
+		/// Does anything needed to initialize the data entry grids
+		/// </summary>
+		private void BuildDataEntryGrids()
+		{
+			cmbUniversity.Items.Add("2020");
+			cmbUniversity.Items.Add("2050");
 		}
 
 		//map functions
@@ -387,18 +398,23 @@ namespace WpfTest
 		/// <summary>
 		/// Shows the screen corresponding to the sender of the event.
 		/// All screen panels hide initially then the correct screen becomes visible
+		/// 
+		/// The DataEntry dockpanel contains both the Education and Jobs Grid and shares 
+		/// the left hand navigation bar
 		/// </summary>
 		/// <param name="sender">Object sending the event</param>
 		private void showScreen(object sender)
 		{
 			dckLogin.Visibility = Visibility.Collapsed;
 			dckMap.Visibility = Visibility.Collapsed;
-			dckJobs.Visibility = Visibility.Collapsed;
-			dckEducation.Visibility = Visibility.Collapsed;
+			dckDataEntry.Visibility = Visibility.Collapsed;
+			grdEducation.Visibility = Visibility.Collapsed;
+			grdJobs.Visibility = Visibility.Collapsed;
 
 			if (sender.Equals(btnEducation))
 			{
-				dckEducation.Visibility = Visibility.Visible;
+				dckDataEntry.Visibility = Visibility.Visible;
+				grdEducation.Visibility = Visibility.Visible;
 			}
 			else if (sender.Equals(btnMap))
 			{
@@ -406,7 +422,8 @@ namespace WpfTest
 			}
 			else if (sender.Equals(btnJobs))
 			{
-				dckJobs.Visibility = Visibility.Visible;
+				dckDataEntry.Visibility = Visibility.Visible;
+				grdJobs.Visibility = Visibility.Visible;
 			}
 			else if (sender.Equals(btnLogin))
 			{
@@ -588,5 +605,39 @@ namespace WpfTest
 		}
 
 
+		private void SubmitJobsData(object sender, RoutedEventArgs e)
+		{
+			//TODO: Do stuff for submitting Jobs Query
+
+		}
+
+		private void ClearJobsData(object sender, RoutedEventArgs e)
+		{
+			cmbDiscipline.SelectedItem = null;
+			cmbField.SelectedItem = null;
+			cmbProjection.SelectedItem = null;
+			rdUp.IsChecked = false;
+			rdDown.IsChecked = false;
+			txtForecast.Text = String.Empty;
+			txtCurrentEmployment.Text = String.Empty;
+			txtAverageSalary.Text = String.Empty;
+		}
+
+		private void SubmitEducationData(object sender, RoutedEventArgs e)
+		{
+			//TODO: Do stuff for submitting Education Query
+
+		}
+
+		private void ClearEducationData(object sender, RoutedEventArgs e)
+		{
+			cmbUniversity.SelectedItem = null;
+			txtRelatedProgram.Text = String.Empty;
+			txtSeats.Text = String.Empty;
+			txtCurrentEnrollment.Text = String.Empty;
+			txtGraduatesPerYear.Text = String.Empty;
+			txtJobAttainment.Text = String.Empty;
+			txtTuition.Text = String.Empty;
+		}
 	}
 }

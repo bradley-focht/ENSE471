@@ -160,9 +160,8 @@
 			</StackPanel>
 
 		</DockPanel>
-		<DockPanel x:Name="dckJobs" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-			<Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 2, 2" >
-				<StackPanel Orientation="Vertical" Name="navScreen">
+		<DockPanel x:Name="dckDataEntry" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+			<!--<StackPanel DockPanel.Dock="Left" Orientation="Vertical" Name="navScreen">
 					<StackPanel.Resources>
 						<Style TargetType="{x:Type Button}">
 							<Setter Property="Foreground" Value="White"/>
@@ -182,9 +181,9 @@
 					<Button>Prince Edward Island</Button>
 					<Button>Quebec</Button>
 					<Button Background="#1450C8">Saskatchewan</Button>
-				</StackPanel>
-			</Border>
-			<Grid x:Name="JobsGrid" Margin="30" >
+				</StackPanel>-->
+
+				<Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
 				<Grid.Resources>
 					<Style TargetType="{x:Type Label}">
 						<Setter Property="Foreground" Value="White"/>
@@ -203,12 +202,13 @@
 					<Style TargetType="{x:Type Button}">
 						<Setter Property="Foreground" Value="White"/>
 						<Setter Property="Padding" Value="5"/>
+						<Setter Property="Margin" Value="5"/>
 						<Setter Property="BorderBrush" Value="Transparent"/>
 						<Setter Property="Background" Value="#0A2846" />
 					</Style>
 				</Grid.Resources>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition MaxWidth="100" MinWidth="70"/>
+					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition MaxWidth="200"/>
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
@@ -223,45 +223,99 @@
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="30"/>
-					<RowDefinition Height="100"/>
-					<RowDefinition Height="30"/>
+					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<Label Grid.Column="0" Grid.Row="0">Field:</Label>
-				<ComboBox Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
-				<ComboBox Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Discipline </Label>
+				<Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Field </Label>
+				<ComboBox x:Name="cmbDiscipline" Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
+				<ComboBox x:Name="cmbField" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="2">Projections:</Label>
-				<ComboBox Width="100" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Projection </Label>
+				<ComboBox x:Name="cmbProjection" Width="100" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="3">Increase</Label>
-				<RadioButton Grid.Column="1" Grid.Row="3" Name="up" GroupName="upDown"/>
+				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Increase </Label>
+				<RadioButton Grid.Column="1" Grid.Row="4" Name="rdUp" GroupName="rdForecast"/>
 
-				<Label  Grid.Column="0" Grid.Row="4">Decrease</Label>
-				<RadioButton Grid.Column="1" Grid.Row="4" Name="down" GroupName="upDown"/>
+				<Label  Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Decrease </Label>
+				<RadioButton Grid.Column="1" Grid.Row="5" Name="rdDown" GroupName="rdForecast"/>
 
-				<Label Grid.Column="0" Grid.Row="5">By:</Label>
-				<TextBox Grid.Column="1" Grid.Row="5" Width="100" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Forecast </Label>
+				<TextBox x:Name="txtForecast" Grid.Column="1" Grid.Row="6" Width="100" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="6">Current:</Label>
+				<Label Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">Current Employment</Label>
+				<TextBox x:Name="txtCurrentEmployment" Grid.Column="1" Grid.Row="8" Width="100" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="7">Employed:</Label>
-				<TextBox Grid.Column="1" Grid.Row="7" Width="100" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right">Average Salary </Label>
+				<TextBox x:Name="txtAverageSalary" Grid.Column="1" Grid.Row="9" Width="100" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="8">Openings:</Label>
-				<TextBox Grid.Column="1" Grid.Row="8" Width="100" HorizontalAlignment="Left"/>
-
-				<Label Grid.Column="0" Grid.Row="9">Salary:</Label>
-				<TextBox Grid.Column="1" Grid.Row="9" Width="100" HorizontalAlignment="Left"/>
-
-				<Label Grid.Column="0" Grid.Row="10">Comments:</Label>
-
-				<TextBox Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalAlignment="Left" Width="180" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
-
-				<Button Grid.Column="0" Grid.Row="12">Accept</Button>
-				<Button Grid.Column="1" Grid.Row="12" HorizontalAlignment="Left" Width="100">Cancel</Button>
+				<Button Grid.Column="0" Grid.Row="11" Click="SubmitJobsData">Accept</Button>
+				<Button Grid.Column="1" Grid.Row="11" HorizontalAlignment="Left" Width="100" Click="ClearJobsData">Cancel</Button>
 			</Grid>
-		</DockPanel>
-		<DockPanel x:Name="dckEducation" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+			
+			<Grid x:Name="grdEducation" Margin="30" Visibility="Collapsed">
+				<Grid.Resources>
+					<Style TargetType="{x:Type Label}">
+						<Setter Property="Foreground" Value="White"/>
+					</Style>
+					<Style TargetType="{x:Type ComboBox}">
+						<Setter Property="Height" Value="20"/>
+						<Setter Property="VerticalAlignment" Value="Center"/>
+					</Style>
+					<Style TargetType="{x:Type TextBox}">
+						<Setter Property="Height" Value="20"/>
+						<Setter Property="VerticalAlignment" Value="Center"/>
+					</Style>
+					<Style TargetType="{x:Type RadioButton}">
+						<Setter Property="Margin" Value="0,10,0,0"/>
+					</Style>
+					<Style TargetType="{x:Type Button}">
+						<Setter Property="Foreground" Value="White"/>
+						<Setter Property="Padding" Value="5"/>
+						<Setter Property="Margin" Value="5"/>
+						<Setter Property="BorderBrush" Value="Transparent"/>
+						<Setter Property="Background" Value="#0A2846" />
+					</Style>
+				</Grid.Resources>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition MaxWidth="200"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">University </Label>
+				<ComboBox x:Name="cmbUniversity" Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
+
+				<Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Related Program </Label>
+				<TextBox x:Name="txtRelatedProgram" Width="100" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"/>
+
+				<Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Seats </Label>
+				<TextBox x:Name="txtSeats" Width="100" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"/>
+
+				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Current Enrollment</Label>
+				<TextBox x:Name="txtCurrentEnrollment" Width="100" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"/>
+
+				<Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Graduates per Year </Label>
+				<TextBox x:Name="txtGraduatesPerYear" Width="100" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left"/>
+
+				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Job Attainment </Label>
+				<TextBox x:Name="txtJobAttainment" Width="100" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"/>
+
+				<Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">Tuition </Label>
+				<TextBox x:Name="txtTuition" Width="100" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left"/>
+
+				<Button Grid.Column="0" Grid.Row="9" Click="SubmitEducationData">Accept</Button>
+				<Button Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" Width="100" Click="ClearEducationData">Cancel</Button>
+			</Grid>
 		</DockPanel>
 	</DockPanel>
 </Window>
