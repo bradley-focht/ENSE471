@@ -310,6 +310,7 @@ namespace WpfTest
             {
                 var programs = from p in ces.programs
                                where p.parent == 0
+                               orderby p.name ascending
                                select new { p.name, p.id };
 
                 //make the buttons
@@ -336,6 +337,7 @@ namespace WpfTest
             {
                 var programs = from p in ces.programs
                                where p.parent == parentId
+                               orderby p.name ascending
                                select new { p.name, p.id };
 
                 foreach (var p in programs)
@@ -431,6 +433,11 @@ namespace WpfTest
                                orderby d.id descending
                                select new { d.demand }).FirstOrDefault();
 
+                var universities = from u in ces.universities
+                                   where u.province_id == provId
+                                   orderby u.name
+                                   select new { u.name, u.id };
+
                 if (demands == null)
                 {
                     return;
@@ -478,14 +485,20 @@ namespace WpfTest
                 MenuItem o = new MenuItem();
                 o.Style = this.FindResource("cxMenuItemStyle") as Style;
 
-                m.Items.Add(n);
-                n.Items.Add(o);
+				
+                
                 m.Header = "want this job?";
-                n.Header = "go to this school";
+				foreach (var u in universities)
+				{
+					MenuItem i = new MenuItem();
+					i.Header = u.name;
+					m.Items.Add(i);
+				}
+				
                 o.Header = "here is some more info";
                 c.StaysOpen = true;
 
-                c.Items.Add(m);
+				c.Items.Add(m);
 
             }
 
@@ -833,6 +846,7 @@ namespace WpfTest
                 {
                     var programs = from p in ces.programs
                                    where p.parent == progId
+                                   orderby p.name ascending
                                    select new { p.name, p.id };
 
                     //add a bogey
