@@ -31,6 +31,7 @@ namespace WpfTest
 		SolidColorBrush hlightBack = new SolidColorBrush(Color.FromRgb(20, 80, 200));
 		SolidColorBrush hlightLightBack = new SolidColorBrush(Color.FromRgb(120, 200, 255));
 		private int selectedId; //save the state for selected button on a map
+		private Enums.Provinces selectedProvince;
 
 		public MainWindow()
 		{

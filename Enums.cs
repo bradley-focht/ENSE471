@@ -8,7 +8,7 @@ namespace WpfTest
 {
 	class Enums
 	{
-		private enum Provinces
+		public enum Provinces
 		{
 			Alberta
 			,BritishColumbia
