@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
 
@@ -61,9 +61,9 @@ namespace WpfTest
 
 			//STUFF TO COMMENT OUT FOR SEAN SO HE CAN USE THIS APP TOO
 			//Education data buttons
-			ed_buildPriMenu();
-			BuildProgramEntry();
-			BuildUniv();
+			//ed_buildPriMenu();
+			//BuildProgramEntry();
+			//BuildUniv();
 
 
 			//clear the table
@@ -73,7 +73,7 @@ namespace WpfTest
 			dckMain.Background = defaultBack;
 
 			//build menu
-			map_buildPriMenu();
+			//map_buildPriMenu();
 			//clear map of default colours
 			map_clearColours();
 
