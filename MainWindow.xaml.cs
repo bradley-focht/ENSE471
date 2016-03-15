@@ -486,8 +486,13 @@ namespace WpfTest
 				m.Items.Add(n);
 				n.Items.Add(o);
 				m.Header = "want this job?";
-				n.Header = "go to this school";
-				o.Header = "here is some more info";
+				foreach(var u in universities)
+				{
+					MenuItem i = new MenuItem();
+					i.Header = u.name;
+					m.Items.Add(i);
+				}
+
 				c.StaysOpen = true;
 
 				c.Items.Add(m);
