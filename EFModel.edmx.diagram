@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="context.program" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="context.province" Width="1.5" PointX="1.5" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="context.university" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="context.university_programs" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.university_programs" Width="1.75" PointX="6" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="context.username" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="context.job_dem_fiel" ManuallyRouted="false" />
         <AssociationConnector Association="context.job_dem_prog" ManuallyRouted="false" />
