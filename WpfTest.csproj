@@ -160,6 +160,7 @@
     <Resource Include="logo.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="HintIcon.png" />
     <Content Include="EFModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EFModel.edmx</DependentUpon>
