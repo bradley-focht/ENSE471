@@ -430,7 +430,13 @@ namespace WpfTest
                 var demands = (from d in ces.job_demand
                                where d.province_id == provId && d.program_id == selectedId
                                orderby d.id descending
-                               select new { d.demand }).First();
+                               select new { d.demand }).FirstOrDefault();
+
+                if (demands == null)
+                {
+                    return;
+
+                } else { }
 
                 Label l = new Label();
                 l.FontSize = 15;
