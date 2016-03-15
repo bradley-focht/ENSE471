@@ -55,7 +55,6 @@ namespace WpfTest
             btnNavPri.Visibility = Visibility.Collapsed;
             btnNavSec.Visibility = Visibility.Collapsed;
             btnNavTitle.Visibility = Visibility.Collapsed;
-            //Hi, this is Sean doing a test! Also, use tabs instead of spaces dude.
 
             //set background colour
             dckMain.Background = defaultBack;
@@ -791,7 +790,7 @@ namespace WpfTest
         private void ClearEducationData(object sender, RoutedEventArgs e)
         {
             cmbUniversity.SelectedItem = null;
-            txtRelatedProgram.Text = String.Empty;
+            cmbRelatedProgram.SelectedItem = null;
             txtSeats.Text = String.Empty;
             txtCurrentEnrollment.Text = String.Empty;
             txtGraduatesPerYear.Text = String.Empty;

@@ -293,25 +293,25 @@
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">University </Label>
-				<ComboBox x:Name="cmbUniversity" Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
+				<ComboBox x:Name="cmbUniversity" Width="150" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Related Program </Label>
-				<TextBox x:Name="txtRelatedProgram" Width="100" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"/>
+				<ComboBox x:Name="cmbRelatedProgram" Width="150" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Seats </Label>
-				<TextBox x:Name="txtSeats" Width="100" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtSeats" Width="150" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Current Enrollment</Label>
-				<TextBox x:Name="txtCurrentEnrollment" Width="100" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtCurrentEnrollment" Width="150" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Graduates per Year </Label>
-				<TextBox x:Name="txtGraduatesPerYear" Width="100" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtGraduatesPerYear" Width="150" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Job Attainment </Label>
-				<TextBox x:Name="txtJobAttainment" Width="100" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtJobAttainment" Width="150" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">Tuition </Label>
-				<TextBox x:Name="txtTuition" Width="100" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtTuition" Width="150" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left"/>
 
 				<Button Grid.Column="0" Grid.Row="9" Click="SubmitEducationData">Accept</Button>
 				<Button Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" Width="100" Click="ClearEducationData">Cancel</Button>
