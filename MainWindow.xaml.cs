@@ -44,7 +44,7 @@ namespace WpfTest
 
 			//initial screen setup ... such a bad way of doing it
 			dckLogin.Visibility = Visibility.Visible;
-			
+		   	
 			dckMap.Visibility = Visibility.Collapsed;
 			dckTopButtons.Visibility = Visibility.Collapsed;
 			btnNavPri.Visibility = Visibility.Collapsed;
