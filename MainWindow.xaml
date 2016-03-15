@@ -136,7 +136,7 @@
 				<Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
 			</Grid>
 
-			<Image DockPanel.Dock="Right" VerticalAlignment="Top" Margin="10" Source="HintIcon.png" Height="30" Width="30" >
+			<Image x:Name="imgToolTip" DockPanel.Dock="Right" VerticalAlignment="Top" Margin="10" Source="HintIcon.png" Height="30" Width="30" >
 				<Image.ToolTip>
 					<StackPanel Orientation="Vertical" Width="150">
 						<TextBlock>
