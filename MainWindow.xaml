@@ -41,23 +41,29 @@
 		</Style>
 	</Window.Resources>
 	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
-		<DockPanel Name="dckTopButtons" DockPanel.Dock="Top"> <!-- these buttons look like crap -->
-			<StackPanel Orientation="Horizontal">
-			<Image Source="logo.gif" Height="60" Width="60" />
-			<StackPanel Orientation="Vertical" Width="100">
+		<Grid Name="dckTopButtons" DockPanel.Dock="Top"> <!-- these buttons look like crap -->
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="20" /> <!-- Hackiest fix ever LOL. Keep this to maintain proper alignment -->
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="0" Orientation="Horizontal">
+				<Image Margin="5" Source="logo.gif" Height="60" Width="60" />
+				<StackPanel Orientation="Vertical" Width="100">
 					<TextBlock x:Name="subHeaderText" FontWeight="DemiBold" Text="Canadian Education Strategy " FontSize="18" TextWrapping="Wrap" Foreground="Red" />
+				</StackPanel>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" Width="450">
+			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
 				<Button Name="btnMap" Content="Analysis" Width="150" Height="30" Click="ChangeScreen"/>
 				<Button Name="btnEducation" Content="Education Data"  Width="150" Height="30" Click="ChangeScreen" />
 				<Button Name="btnJobs" Content="Jobs Data" Width="150" Height="30" Click="ChangeScreen" />
 			</StackPanel>
-			<StackPanel Name="stckLogin" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center">
-				<TextBlock Text="You are logged in as Sean Bozcaluk" Foreground="White" HorizontalAlignment="Right"></TextBlock>
+			<StackPanel Name="stckLogin" Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+				<TextBlock Text="You are logged in as Sean Boczulak" Foreground="White" HorizontalAlignment="Right"></TextBlock>
 				<TextBlock Text="Log out" HorizontalAlignment="Right" Foreground="Wheat" />
 			</StackPanel>
-			</StackPanel>
-		</DockPanel>
+		</Grid>
 		<DockPanel Name="dckMap">
 
 		<Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2" Margin="5"  >
