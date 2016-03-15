@@ -67,6 +67,7 @@ namespace WpfTest
             BuildProgramEntry();
             BuildUniv();
 
+
             //clear the table
             table_buildCanadaWideAggregation();
             //grid margin 
@@ -163,6 +164,8 @@ namespace WpfTest
                     cmbDiscipline.Items.Add(c);
                 }
             }
+            cmbDiscipline.SelectedValue = cmbDiscipline.Items[0];
+
         }
 
         //map functions
@@ -743,8 +746,8 @@ namespace WpfTest
         /// <param name="e"></param>
         private void ClearJobsData(object sender, RoutedEventArgs e)
         {
-            cmbDiscipline.SelectedValue= 
-            cmbField.SelectedItem = null;
+            cmbDiscipline.SelectedValue = cmbDiscipline.Items[0];
+            cmbField.SelectedItem = cmbField.Items[0];
             cmbProjection.SelectedItem = null;
             rdUp.IsChecked = false;
             rdDown.IsChecked = false;
@@ -843,6 +846,7 @@ namespace WpfTest
                     }
                 }
             }
+            cmbField.SelectedItem = cmbField.Items[0];
         }
 
         private void BuildUniv()
