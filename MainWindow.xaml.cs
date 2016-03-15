@@ -64,6 +64,8 @@ namespace WpfTest
             //Education data buttons
             ed_buildPriMenu();
             BuildProgramEntry();
+            BuildUniv();
+
 
             //clear the table
             table_buildCanadaWideAggregation();
@@ -161,6 +163,8 @@ namespace WpfTest
                     cmbDiscipline.Items.Add(c);
                 }
             }
+            cmbDiscipline.SelectedValue = cmbDiscipline.Items[0];
+
         }
 
         //map functions
@@ -702,13 +706,13 @@ namespace WpfTest
         private void SubmitJobsData(object sender, RoutedEventArgs e)
         {
             int demand = 0;
-            long employment = 0;
-            double wage = 0;
+            int employment = 0;
+            long wage = 0;
             try
             {
                 demand = int.Parse(txtForecast.Text) % 100;
-                employment = long.Parse(txtCurrentEmployment.Text) % 100;
-                wage = double.Parse(txtAverageSalary.Text); 
+                employment = int.Parse(txtCurrentEmployment.Text) % 100;
+                wage = long.Parse(txtAverageSalary.Text); 
             }
             catch (Exception ex) { return; }
 
@@ -721,15 +725,17 @@ namespace WpfTest
 
             using (var context = new newCesModel())
             {
-                    var j = new job_demand();
-                    j.job_field_id = 1;
-                    j.program_id = jbProgSelectedId;
-                    j.province_id = jbProvSelectedId;
-                    j.forecast_year = 2020;
-                    j.demand = demand;
+                var j = new job_demand();
+                j.job_field_id = 1;
+                j.program_id = jbProgSelectedId;
+                j.province_id = jbProvSelectedId;
+                j.forecast_year = 2020;
+                j.demand = demand;
+                j.wage = wage;
+                j.employment = employment;
 
-                    context.job_demand.Add(j);
-                    context.SaveChanges();
+                context.job_demand.Add(j);
+                context.SaveChanges();
             }
         }
         /// <summary>
@@ -739,8 +745,8 @@ namespace WpfTest
         /// <param name="e"></param>
         private void ClearJobsData(object sender, RoutedEventArgs e)
         {
-            cmbDiscipline.SelectedValue= 
-            cmbField.SelectedItem = null;
+            cmbDiscipline.SelectedValue = cmbDiscipline.Items[0];
+            cmbField.SelectedItem = cmbField.Items[0];
             cmbProjection.SelectedItem = null;
             rdUp.IsChecked = false;
             rdDown.IsChecked = false;
@@ -836,6 +842,35 @@ namespace WpfTest
                         c.Name = "cmbFieldId_" + p.id.ToString();
 
                         cmbField.Items.Add(c);
+                    }
+                }
+            }
+            cmbField.SelectedItem = cmbField.Items[0];
+        }
+
+        private void BuildUniv()
+        {
+            cmbUniversity.Items.Clear();
+
+            {
+                using (var context = new newCesModel())
+                {
+                    var universities = from p in ces.universities
+                                   select new { p.name, p.id };
+
+                    //add a bogey
+                    ComboBoxItem b = new ComboBoxItem();
+                    b.Content = "---select---";
+                    b.Name = "bogey";
+                    cmbField.Items.Add(b);
+
+                    foreach (var u in universities)
+                    {
+                        ComboBoxItem c = new ComboBoxItem();
+                        c.Content = u.name;
+                        c.Name = "cmbFieldId_" + u.id.ToString();
+
+                        cmbUniversity.Items.Add(c);
                     }
                 }
             }
