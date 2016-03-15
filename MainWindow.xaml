@@ -42,6 +42,14 @@
 	</Window.Resources>
 	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
 		<Grid Name="dckTopButtons" DockPanel.Dock="Top">
+			<Grid.Resources>
+				<Style TargetType="{x:Type Button}">
+					<Setter Property="Foreground" Value="White"/>
+					<Setter Property="Padding" Value="5"/>
+					<Setter Property="BorderBrush" Value="Transparent"/>
+					<Setter Property="Background" Value="#0A2846" />
+				</Style>
+			</Grid.Resources>
 			<!-- these buttons look like crap -->
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
