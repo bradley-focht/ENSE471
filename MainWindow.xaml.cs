@@ -430,6 +430,11 @@ namespace WpfTest
 							   orderby d.id descending
 							   select new { d.demand }).FirstOrDefault();
 
+				var universities = from u in ces.universities
+								   where u.province.acronym == acronym
+								   orderby u.name ascending
+								   select new { u.id, u.name };
+
 				if (demands == null)
 				{
 					return;
