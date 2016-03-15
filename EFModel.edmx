@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cesModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="context.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="job_demand">
           <Key>
             <PropertyRef Name="id" />
@@ -12,9 +12,11 @@
           <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="job_field_id" Type="uint" Nullable="false" />
           <Property Name="province_id" Type="uint" Nullable="false" />
-          <Property Name="demand" Type="uint" />
+          <Property Name="demand" Type="int" />
           <Property Name="forecast_year" Type="uint" />
           <Property Name="program_id" Type="uint" Nullable="false" />
+          <Property Name="wage" Type="uint" Nullable="false" />
+          <Property Name="employment" Type="uint" Nullable="false" />
         </EntityType>
         <EntityType Name="job_fields">
           <Key>
@@ -170,7 +172,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="cesModelStoreContainer">
+        <EntityContainer Name="contextStoreContainer">
           <EntitySet Name="job_demand" EntityType="Self.job_demand" Schema="ces" store:Type="Tables" />
           <EntitySet Name="job_fields" EntityType="Self.job_fields" Schema="ces" store:Type="Tables" />
           <EntitySet Name="job_requirements" EntityType="Self.job_requirements" Schema="ces" store:Type="Tables" />
@@ -212,11 +214,10 @@
             <End Role="university_programs" EntitySet="university_programs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="cesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="context" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="job_demand">
           <Key>
             <PropertyRef Name="id" />
@@ -224,12 +225,14 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="job_field_id" Type="Int64" Nullable="false" />
           <Property Name="province_id" Type="Int64" Nullable="false" />
-          <Property Name="demand" Type="Int64" />
+          <Property Name="demand" Type="Int32" />
           <Property Name="forecast_year" Type="Int64" />
           <Property Name="program_id" Type="Int64" Nullable="false" />
           <NavigationProperty Name="job_fields" Relationship="Self.job_dem_fiel" FromRole="job_demand" ToRole="job_fields" />
           <NavigationProperty Name="program" Relationship="Self.job_dem_prog" FromRole="job_demand" ToRole="programs" />
           <NavigationProperty Name="province" Relationship="Self.job_dem_prov" FromRole="job_demand" ToRole="provinces" />
+          <Property Name="wage" Type="Int64" Nullable="false" />
+          <Property Name="employment" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="job_fields">
           <Key>
@@ -398,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="cesEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="newCesModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="job_demand" EntityType="Self.job_demand" />
           <EntitySet Name="job_fields" EntityType="Self.job_fields" />
           <EntitySet Name="job_requirements" EntityType="Self.job_requirements" />
@@ -445,10 +448,12 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="cesModelStoreContainer" CdmEntityContainer="cesEntities">
+        <EntityContainerMapping StorageEntityContainer="contextStoreContainer" CdmEntityContainer="newCesModel">
           <EntitySetMapping Name="job_demand">
-            <EntityTypeMapping TypeName="cesModel.job_demand">
+            <EntityTypeMapping TypeName="context.job_demand">
               <MappingFragment StoreEntitySet="job_demand">
+                <ScalarProperty Name="employment" ColumnName="employment" />
+                <ScalarProperty Name="wage" ColumnName="wage" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="job_field_id" ColumnName="job_field_id" />
                 <ScalarProperty Name="province_id" ColumnName="province_id" />
@@ -459,7 +464,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="job_fields">
-            <EntityTypeMapping TypeName="cesModel.job_fields">
+            <EntityTypeMapping TypeName="context.job_fields">
               <MappingFragment StoreEntitySet="job_fields">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -467,7 +472,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="job_requirements">
-            <EntityTypeMapping TypeName="cesModel.job_requirements">
+            <EntityTypeMapping TypeName="context.job_requirements">
               <MappingFragment StoreEntitySet="job_requirements">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="job_field_id" ColumnName="job_field_id" />
@@ -476,7 +481,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="programs">
-            <EntityTypeMapping TypeName="cesModel.program">
+            <EntityTypeMapping TypeName="context.program">
               <MappingFragment StoreEntitySet="programs">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -485,7 +490,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="provinces">
-            <EntityTypeMapping TypeName="cesModel.province">
+            <EntityTypeMapping TypeName="context.province">
               <MappingFragment StoreEntitySet="provinces">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="acronym" ColumnName="acronym" />
@@ -494,7 +499,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="universities">
-            <EntityTypeMapping TypeName="cesModel.university">
+            <EntityTypeMapping TypeName="context.university">
               <MappingFragment StoreEntitySet="universities">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="province_id" ColumnName="province_id" />
@@ -503,7 +508,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="university_programs">
-            <EntityTypeMapping TypeName="cesModel.university_programs">
+            <EntityTypeMapping TypeName="context.university_programs">
               <MappingFragment StoreEntitySet="university_programs">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="university_id" ColumnName="university_id" />
@@ -514,7 +519,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="usernames">
-            <EntityTypeMapping TypeName="cesModel.username">
+            <EntityTypeMapping TypeName="context.username">
               <MappingFragment StoreEntitySet="usernames">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username1" ColumnName="username" />

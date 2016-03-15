@@ -13,10 +13,10 @@ namespace WpfTest
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class cesEntities : DbContext
+    public partial class newCesModel : DbContext
     {
-        public cesEntities()
-            : base("name=cesEntities")
+        public newCesModel()
+            : base("name=newCesModel")
         {
         }
     

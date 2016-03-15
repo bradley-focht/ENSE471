@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e79001f290e44b3da93f6ec0c1662730" Name="Diagram1">
+        <EntityTypeShape EntityType="context.job_demand" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.job_fields" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.job_requirements" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.program" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.province" Width="1.5" PointX="1.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.university" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.university_programs" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="context.username" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="context.job_dem_fiel" ManuallyRouted="false" />
+        <AssociationConnector Association="context.job_dem_prog" ManuallyRouted="false" />
+        <AssociationConnector Association="context.job_dem_prov" ManuallyRouted="false" />
+        <AssociationConnector Association="context.job_req_field" ManuallyRouted="false" />
+        <AssociationConnector Association="context.job_req_prog" ManuallyRouted="false" />
+        <AssociationConnector Association="context.prog_id" ManuallyRouted="false" />
+        <AssociationConnector Association="context.prov_uni_id" ManuallyRouted="false" />
+        <AssociationConnector Association="context.uni_id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

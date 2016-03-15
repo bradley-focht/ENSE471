@@ -63,35 +63,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="cesModel.cs">
+    <Compile Include="EFModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EFModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EFModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="job_demand.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="job_fields.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="job_requirements.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="program.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="province.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="university.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="university_programs.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="username.cs">
-      <DependentUpon>cesModel.tt</DependentUpon>
+      <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,16 +110,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="cesModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>cesModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="cesModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>cesModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -134,12 +134,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="cesModel.edmx">
+    <EntityDeploy Include="EFModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>cesModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>EFModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="cesModel.edmx.diagram">
-      <DependentUpon>cesModel.edmx</DependentUpon>
+    <None Include="EFModel.edmx.diagram">
+      <DependentUpon>EFModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -157,17 +157,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="cesModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cesModel.edmx</DependentUpon>
-      <LastGenOutput>cesModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="cesModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cesModel.edmx</DependentUpon>
-      <LastGenOutput>cesModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="logo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EFModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModel.edmx</DependentUpon>
+      <LastGenOutput>EFModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EFModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModel.edmx</DependentUpon>
+      <LastGenOutput>EFModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

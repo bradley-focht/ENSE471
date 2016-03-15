@@ -17,9 +17,11 @@ namespace WpfTest
         public long id { get; set; }
         public long job_field_id { get; set; }
         public long province_id { get; set; }
-        public Nullable<long> demand { get; set; }
+        public Nullable<int> demand { get; set; }
         public Nullable<long> forecast_year { get; set; }
         public long program_id { get; set; }
+        public long wage { get; set; }
+        public long employment { get; set; }
     
         public virtual job_fields job_fields { get; set; }
         public virtual program program { get; set; }

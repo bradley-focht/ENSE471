@@ -137,7 +137,7 @@
 
 		</DockPanel>
 
-		<DockPanel Name="dckLogin" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+		<DockPanel Name="dckLogin" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" LastChildFill="False">
 		 
 			<StackPanel Orientation="Vertical">
 				<Image Source="logo.gif" Height="100" Width="100" />
@@ -161,7 +161,7 @@
 
 		</DockPanel>
 		<DockPanel x:Name="dckDataEntry" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-			<!--<StackPanel DockPanel.Dock="Left" Orientation="Vertical" Name="navScreen">
+			<StackPanel DockPanel.Dock="Left" Orientation="Vertical" Name="navScreen">
 					<StackPanel.Resources>
 						<Style TargetType="{x:Type Button}">
 							<Setter Property="Foreground" Value="White"/>
@@ -170,8 +170,8 @@
 							<Setter Property="Background" Value="#0A2846" />
 							<Setter Property="HorizontalContentAlignment" Value="Left"/>
 						</Style>
-					</StackPanel.Resources>
-					<Button>Alberta</Button>
+                   </StackPanel.Resources>
+                <!--<Button>Alberta</Button>
 					<Button>British Columbia</Button>
 					<Button>Manitoba</Button>
 					<Button>New Brunswick</Button>
@@ -180,9 +180,9 @@
 					<Button>Ontario</Button>
 					<Button>Prince Edward Island</Button>
 					<Button>Quebec</Button>
-					<Button Background="#1450C8">Saskatchewan</Button>
-				</StackPanel>-->
+					<Button Background="#1450C8">Saskatchewan</Button>-->
 
+            </StackPanel>
 				<Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
 				<Grid.Resources>
 					<Style TargetType="{x:Type Label}">
@@ -227,8 +227,8 @@
 				</Grid.RowDefinitions>
 				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Discipline </Label>
 				<Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Field </Label>
-				<ComboBox x:Name="cmbDiscipline" Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
-				<ComboBox x:Name="cmbField" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="cmbDiscipline" SelectionChanged="cmbDiscipline_SelectChanged"  Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
+				<ComboBox x:Name="cmbField" SelectionChanged="cmbField_SelectionChanged" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Projection </Label>
 				<ComboBox x:Name="cmbProjection" Width="100" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"/>
