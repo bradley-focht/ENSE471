@@ -16,7 +16,7 @@
 			<Setter Property="Opacity" Value="0.95" />
 
 		</Style>
-		
+
 		<Style x:Key="cxMenuStyle" TargetType="{x:Type ContextMenu}">
 			<Setter Property="Background" Value="White"/>
 			<Setter Property="HorizontalAlignment" Value="Left" />
@@ -41,12 +41,14 @@
 		</Style>
 	</Window.Resources>
 	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
-		<Grid Name="dckTopButtons" DockPanel.Dock="Top"> <!-- these buttons look like crap -->
+		<Grid Name="dckTopButtons" DockPanel.Dock="Top">
+			<!-- these buttons look like crap -->
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="20" /> <!-- Hackiest fix ever LOL. Keep this to maintain proper alignment -->
+				<ColumnDefinition Width="20" />
+				<!-- Hackiest fix ever LOL. Keep this to maintain proper alignment -->
 			</Grid.ColumnDefinitions>
 			<StackPanel Grid.Column="0" Orientation="Horizontal">
 				<Image Margin="5" Source="logo.gif" Height="60" Width="60" />
@@ -66,85 +68,85 @@
 		</Grid>
 		<DockPanel Name="dckMap">
 
-		<Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2" Margin="5"  >
-		   <StackPanel Orientation="Vertical">
+			<Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2" Margin="5"  >
+				<StackPanel Orientation="Vertical">
 					<StackPanel Orientation="Horizontal" Name="btnNavTitle" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center"/>
 					<StackPanel Orientation="Horizontal">
 						<StackPanel  Orientation="Vertical" Name="btnNavPri" HorizontalAlignment="Right" Width="100"  />
 						<StackPanel Orientation="Vertical" Name="btnNavSec" HorizontalAlignment="Right" Width="100" />
 					</StackPanel>
 				</StackPanel>
-		</Border>
-		<Grid  Name="gridMap" >
+			</Border>
+			<Grid  Name="gridMap" >
 
 				<Polygon Name="bc"  MouseDown="bc_MouseDown" Points="21, 196 113, 252 86, 317 91, 326 109, 369 106, 379 108, 386 43, 359 36, 349 37, 342 31, 336 32, 351 38, 357 37, 364 28, 356 25, 354 16, 333 19, 330 16, 323 19, 323 29, 335 30, 331 23, 325 27, 310 28, 299 22, 300 30, 292 25, 292 26, 280 38, 264 33, 252 35, 230 33, 210 25, 212 21, 211 " Fill="Blue" />
-						<Polygon Name="bc_hg" MouseDown="bc_MouseDown" Points="11, 272 12, 276 16, 277 8, 285 11, 288 8, 289 7, 298 5, 298 4, 287 5, 277" Fill="Blue" />
+				<Polygon Name="bc_hg" MouseDown="bc_MouseDown" Points="11, 272 12, 276 16, 277 8, 285 11, 288 8, 289 7, 298 5, 298 4, 287 5, 277" Fill="Blue" />
 
-						<Polygon  Name="yk" MouseDown="yk_MouseDown" Points="85, 106 90, 114 94, 123 81, 141 90, 147 85, 158 89, 161 82, 171 82, 179 86, 188 80, 208 84, 227 94, 231 97, 243 21, 197 22, 192 14, 184 85, 106" Fill="RosyBrown" />
-
-
-						<Polygon Name="ab" MouseDown="ab_MouseDown" Points="112, 251 169, 270 138, 394 107, 386 105, 379 108, 369 92, 336 91, 328 84, 319 111, 252" Fill="LightBlue" />
-
-						<Polygon Name="sk" MouseDown="sk_MouseDown" Points="168, 270 214, 277 206, 406 137, 394" Fill="Green" />
+				<Polygon  Name="yk" MouseDown="yk_MouseDown" Points="85, 106 90, 114 94, 123 81, 141 90, 147 85, 158 89, 161 82, 171 82, 179 86, 188 80, 208 84, 227 94, 231 97, 243 21, 197 22, 192 14, 184 85, 106" Fill="RosyBrown" />
 
 
-						<Polygon Name="nw" MouseDown="nwt_MouseDown" Points="94, 124 98, 124 112, 123 124, 126 124, 127 108, 130 117, 130 126, 130 132, 126 134, 141 142, 137 139, 144 142, 147 146, 143 153, 149 147, 166 172, 206 180, 207 184, 216 220, 229 214, 278 168, 271 114, 253 95, 242 92, 234 91, 231 83, 227 84, 228 82, 218 79, 208 85, 187 80, 175 81, 169 87, 164 87, 160 83, 157 88, 148 80, 142 86, 132 94, 123" Fill="SandyBrown" />
-						<Polygon Name="nw_bki" MouseDown="nwt_MouseDown" Points="164, 93 175, 95 175, 100 183, 102 187, 112 171, 120 162, 127 152, 128 153, 123 149, 115 162, 101 164, 93" Fill="SandyBrown" />
-						<Polygon Name="nw_tv" MouseDown="nwt_MouseDown" Points="168, 150 168, 148 180, 149 189, 153 189, 150 183, 145 178, 145 169, 142 168, 138 170, 137 179, 136 171, 133 171, 131 169, 130 174, 125 174, 122 190, 116 191, 120 187, 123 190, 124 193, 121 199, 127 198, 129 202, 128 196, 157 170, 150 169, 150" Fill="SandyBrown" />
-						<Polygon Name="nw_mi" MouseDown="nwt_MouseDown" Points="189, 90 199, 80 205, 87 207, 94 211, 95 208, 104 201, 105 196, 101 205, 98 193, 95 190, 92" Fill="SandyBrown" />
-						<Polygon Name="nw_ai" MouseDown="nwt_MouseDown" Points="196, 66 201, 68 199, 75 194, 81 193, 72 186, 82 179, 76 179, 75 193, 67" Fill="SandyBrown" />
-						<Polygon Name="nw_ai2" MouseDown="nwt_MouseDown" Points="215, 73 217, 65 209, 65 208, 70 " Fill="SandyBrown" />
+				<Polygon Name="ab" MouseDown="ab_MouseDown" Points="112, 251 169, 270 138, 394 107, 386 105, 379 108, 369 92, 336 91, 328 84, 319 111, 252" Fill="LightBlue" />
 
-						<Polygon Name="nv" MouseDown="nvt_MouseDown" Points="152, 148 162, 161 171, 162 174, 173 168, 175 171, 178 189, 181 195, 187 196, 196 199, 194 198, 184 208, 178 199, 180 197, 177 208, 173 211, 178 215, 184 217, 184 224, 190 233, 188 238, 188 245, 191 242, 186 240, 186 238, 184 242, 182 248, 184 248, 197 253, 196 253, 187 259, 181 259, 174 258, 179 256, 177 257, 171 255, 167 249, 163 248, 161 250, 158 249, 157 249, 150 253, 148 252, 144 254, 141 254, 134 251, 132 253, 123 254, 121 255, 118 259, 116 270, 119 267, 127 263, 134 259, 132 257, 141 255, 142 262, 150 263, 157 268, 162 265, 163 265, 170 272, 170 271, 174 275, 183 276, 174 278, 173 285, 183 283, 183 288, 195 292, 190 292, 188 292, 185 293, 177 295, 175 295, 172  292, 163 304, 165 310, 167 310, 176 307, 176 313, 187 314, 193 308, 199 302, 205 291, 204 296, 207 291, 216 286, 215 274, 211 282, 216 292, 218 290, 227 280, 234 278, 237 261, 233 261, 236 274, 240 276, 245 268, 246 271, 251 262, 259 255, 281 213, 279 219, 230 184, 218 180, 210 171, 207 146, 167" Fill="Firebrick" />
-						<Polygon Name="nv_tvi" MouseDown="nvt_MouseDown" Points="169, 153 169, 149 194, 156 202, 129 207, 130 207, 139 210, 138 211, 122 217, 123 215, 119 221, 118 223, 120 220, 130 219, 153 225, 157 232, 166 225, 165 222, 168 226, 170 226, 174 212, 172 212, 171 207, 167 202, 170 198, 170 192, 174 180, 171 178, 163 171, 159" Fill="Firebrick" />
-						<Polygon Name="nv_ti2" MouseDown="nvt_MouseDown" Points="299, 208 304, 216 304, 212 319, 222 320, 226 326, 225 328, 227 323, 233 319, 231 313, 226 305, 239 302, 235 300, 234 295, 235 298, 231 297, 211" Fill="Firebrick" />
-						<Polygon Name="nv_ti3" MouseDown="nvt_MouseDown" Points="241, 148 250, 142 250, 134 243, 128 247, 122 247, 117 240, 120 239, 117 234, 122 237, 131 232, 127 229, 131 234, 140 238, 148" Fill="Firebrick" />
-						<Polygon Name="nv_ti4" MouseDown="nvt_MouseDown" Points="211, 94 214, 92 212, 89 217, 81 219, 89 225, 92 221, 102 209, 102" Fill="Firebrick" />
-						<Polygon Name="nv_ei" MouseDown="nvt_MouseDown" Points="260, 26 272, 20 269, 18 271, 14 274, 14 281, 4 295, 1 295, 5 301, 1 307, 2 307, 9 303, 17 307, 16 301, 35 307, 36 294, 49 300, 54 299, 65 296, 65 298, 70 289, 73 300, 78 294, 86 290, 85 272, 88 269, 86 267, 92 273, 99 279, 98 293, 93 299, 95 300, 104 290, 109 274, 109  270, 110 263, 107 260, 91 254, 92 249, 85 251, 82 269, 85 275, 77 273, 71 285, 74 277, 67 273, 67 274, 59 269, 65 262, 68 257, 58 263, 55 255, 55 251, 44 256, 31 269, 41 280, 38 286, 33 278, 35 269, 37 261, 26 " Fill="Firebrick" />
-						<Polygon Name="nv_ti5" MouseDown="nvt_MouseDown" Points="243, 74 242, 63 236, 53 231, 55 236, 61 231, 66 240, 68" Fill="Firebrick" />
-						<Polygon Name="nv_ti6" MouseDown="nvt_MouseDown" Points="241, 98 238, 102 239, 107 244, 105 245, 99 251, 99 251, 107 259, 109 256, 99 248, 97 247, 87 238, 82 237, 87 232, 94 " Fill="Firebrick" />
-						<Polygon Name="nv_ti7" MouseDown="nvt_MouseDown" Points="248, 60 248, 65 251, 72 251, 77 257, 75 251, 72 255, 68 254, 62" Fill="Firebrick" />
-						<Polygon Name="nv_ti8" MouseDown="nvt_MouseDown" Points="243, 166 252, 177 249, 180 236, 175 240, 172 239, 169" Fill="Firebrick" />
-						<Polygon Name="nv_bfi" MouseDown="nvt_MouseDown" Points="278, 120 287, 117 283, 129 287, 139 290, 135 287, 130 287, 123 291, 118 297, 116 312, 114 319, 122 305, 126 305, 133 309, 130 311, 130 312, 125 315, 123 323, 126 333, 134 337, 131 338, 137 342, 135 353, 135 353, 141 359, 140 359, 147 365, 146 362, 151 364, 155 378, 159 379, 155 382, 159 387, 160 392, 160 392, 165 400, 160 400, 173 395, 177 402, 184 395, 185 388, 179 378, 176 379, 187 384, 187 395, 193 403, 201 406, 210 400, 212 388, 209 385, 209 389, 213 399, 217 405, 219 406, 223 391, 224 386, 223 382, 221 379, 224 372, 221 372, 214 367, 216 355, 211 341, 219 335, 211 339, 209 338, 205 343, 205 355, 198 348, 194 352, 185 353, 177 346, 169 337, 165 333, 169 331, 168 331, 161 314, 151 318, 158 315, 161 313, 158 308, 158 295, 160 290, 161 286, 157 285, 160 279, 158 276, 151 283, 151 281, 148 272, 147 274, 130 277, 121" Fill="Firebrick" />
-						<Polygon Name="nv_ti9" MouseDown="nvt_MouseDown" Points="338, 172 341, 180 335, 183 332, 184 331, 179 332, 172 336, 172" Fill="Firebrick" />
-						<Polygon Name="nv_ti10" MouseDown="nvt_MouseDown" Points="312, 247 316, 248 319, 249 324, 241 324, 239 316, 241" Fill="Firebrick" />
+				<Polygon Name="sk" MouseDown="sk_MouseDown" Points="168, 270 214, 277 206, 406 137, 394" Fill="Green" />
 
-						<Polygon Name="mb" MouseDown="mb_MouseDown" Points="213, 278 255, 281 256, 290 256, 294 264, 295 268, 304 270, 314 272, 313 279, 310 290, 314 253, 362 253, 408 204, 406" Fill="YellowGreen" />
 
-						<Polygon Name="on" MouseDown="on_MouseDown" Points="289, 314 303, 324 310, 324 318, 328 339, 329 343, 346 344, 350 363, 368 367, 367 377, 411 387, 422 404, 423 412, 425 424, 419 425, 426 407, 443 411, 444 387, 458 393, 458 396, 462 384, 468 376, 471 367, 480 362, 481 360, 478 365, 477 366, 468 370, 463 370, 448 367, 440 375, 446 380, 446 383, 443 371, 430 347, 432 341, 429 337, 425 337, 421 332, 415 328, 415 322, 408 309, 405 301, 413 298, 418 287, 414 283, 419 278, 413 267, 412 257, 411 255, 404 253, 404 253, 360 " Fill="Orange" />
+				<Polygon Name="nw" MouseDown="nwt_MouseDown" Points="94, 124 98, 124 112, 123 124, 126 124, 127 108, 130 117, 130 126, 130 132, 126 134, 141 142, 137 139, 144 142, 147 146, 143 153, 149 147, 166 172, 206 180, 207 184, 216 220, 229 214, 278 168, 271 114, 253 95, 242 92, 234 91, 231 83, 227 84, 228 82, 218 79, 208 85, 187 80, 175 81, 169 87, 164 87, 160 83, 157 88, 148 80, 142 86, 132 94, 123" Fill="SandyBrown" />
+				<Polygon Name="nw_bki" MouseDown="nwt_MouseDown" Points="164, 93 175, 95 175, 100 183, 102 187, 112 171, 120 162, 127 152, 128 153, 123 149, 115 162, 101 164, 93" Fill="SandyBrown" />
+				<Polygon Name="nw_tv" MouseDown="nwt_MouseDown" Points="168, 150 168, 148 180, 149 189, 153 189, 150 183, 145 178, 145 169, 142 168, 138 170, 137 179, 136 171, 133 171, 131 169, 130 174, 125 174, 122 190, 116 191, 120 187, 123 190, 124 193, 121 199, 127 198, 129 202, 128 196, 157 170, 150 169, 150" Fill="SandyBrown" />
+				<Polygon Name="nw_mi" MouseDown="nwt_MouseDown" Points="189, 90 199, 80 205, 87 207, 94 211, 95 208, 104 201, 105 196, 101 205, 98 193, 95 190, 92" Fill="SandyBrown" />
+				<Polygon Name="nw_ai" MouseDown="nwt_MouseDown" Points="196, 66 201, 68 199, 75 194, 81 193, 72 186, 82 179, 76 179, 75 193, 67" Fill="SandyBrown" />
+				<Polygon Name="nw_ai2" MouseDown="nwt_MouseDown" Points="215, 73 217, 65 209, 65 208, 70 " Fill="SandyBrown" />
 
-						<Polygon Name="qc" MouseDown="pq_MouseDown" Points="367, 368 372, 362 371, 353 356, 330 364, 322 370, 310 371, 301 366, 291 359, 285 353, 284 351, 281 355, 266 348, 256 348, 249 345, 243 346, 239 358, 238 365, 234 378, 239 379, 241 392, 240 402, 260 401, 264 407, 260 414, 264 421, 253 420, 245 420, 236 426, 245 432, 248 433, 257 440, 258 442, 268 447, 276 451, 276 455, 283 455, 291 451, 290 446, 291 445, 294 436, 291 434, 298 434, 305 442, 312 443, 319 445, 319 447, 315 452, 323 467, 325 464, 313 471, 317 511, 293 515, 299 508, 308 505, 323 493, 330 461, 348 460, 359 457, 360 452, 366 447, 389 442, 396 449, 391 453, 380 459, 368 476, 350 484, 352 486, 358 481, 364 477, 366 473, 368 469, 372 463, 372 457, 385 455, 401 457, 402 452, 413 449, 419 424, 426 424, 422 422, 421 412, 426 407, 424 385, 423 377, 414 366, 367 " Fill="CadetBlue" />
-						<Polygon Name="qc_qi" MouseDown="pq_MouseDown" Points="478, 343 485, 339 493, 339 501, 339 500, 342 492, 345 486, 344 479, 342" Fill="CadetBlue" />
+				<Polygon Name="nv" MouseDown="nvt_MouseDown" Points="152, 148 162, 161 171, 162 174, 173 168, 175 171, 178 189, 181 195, 187 196, 196 199, 194 198, 184 208, 178 199, 180 197, 177 208, 173 211, 178 215, 184 217, 184 224, 190 233, 188 238, 188 245, 191 242, 186 240, 186 238, 184 242, 182 248, 184 248, 197 253, 196 253, 187 259, 181 259, 174 258, 179 256, 177 257, 171 255, 167 249, 163 248, 161 250, 158 249, 157 249, 150 253, 148 252, 144 254, 141 254, 134 251, 132 253, 123 254, 121 255, 118 259, 116 270, 119 267, 127 263, 134 259, 132 257, 141 255, 142 262, 150 263, 157 268, 162 265, 163 265, 170 272, 170 271, 174 275, 183 276, 174 278, 173 285, 183 283, 183 288, 195 292, 190 292, 188 292, 185 293, 177 295, 175 295, 172  292, 163 304, 165 310, 167 310, 176 307, 176 313, 187 314, 193 308, 199 302, 205 291, 204 296, 207 291, 216 286, 215 274, 211 282, 216 292, 218 290, 227 280, 234 278, 237 261, 233 261, 236 274, 240 276, 245 268, 246 271, 251 262, 259 255, 281 213, 279 219, 230 184, 218 180, 210 171, 207 146, 167" Fill="Firebrick" />
+				<Polygon Name="nv_tvi" MouseDown="nvt_MouseDown" Points="169, 153 169, 149 194, 156 202, 129 207, 130 207, 139 210, 138 211, 122 217, 123 215, 119 221, 118 223, 120 220, 130 219, 153 225, 157 232, 166 225, 165 222, 168 226, 170 226, 174 212, 172 212, 171 207, 167 202, 170 198, 170 192, 174 180, 171 178, 163 171, 159" Fill="Firebrick" />
+				<Polygon Name="nv_ti2" MouseDown="nvt_MouseDown" Points="299, 208 304, 216 304, 212 319, 222 320, 226 326, 225 328, 227 323, 233 319, 231 313, 226 305, 239 302, 235 300, 234 295, 235 298, 231 297, 211" Fill="Firebrick" />
+				<Polygon Name="nv_ti3" MouseDown="nvt_MouseDown" Points="241, 148 250, 142 250, 134 243, 128 247, 122 247, 117 240, 120 239, 117 234, 122 237, 131 232, 127 229, 131 234, 140 238, 148" Fill="Firebrick" />
+				<Polygon Name="nv_ti4" MouseDown="nvt_MouseDown" Points="211, 94 214, 92 212, 89 217, 81 219, 89 225, 92 221, 102 209, 102" Fill="Firebrick" />
+				<Polygon Name="nv_ei" MouseDown="nvt_MouseDown" Points="260, 26 272, 20 269, 18 271, 14 274, 14 281, 4 295, 1 295, 5 301, 1 307, 2 307, 9 303, 17 307, 16 301, 35 307, 36 294, 49 300, 54 299, 65 296, 65 298, 70 289, 73 300, 78 294, 86 290, 85 272, 88 269, 86 267, 92 273, 99 279, 98 293, 93 299, 95 300, 104 290, 109 274, 109  270, 110 263, 107 260, 91 254, 92 249, 85 251, 82 269, 85 275, 77 273, 71 285, 74 277, 67 273, 67 274, 59 269, 65 262, 68 257, 58 263, 55 255, 55 251, 44 256, 31 269, 41 280, 38 286, 33 278, 35 269, 37 261, 26 " Fill="Firebrick" />
+				<Polygon Name="nv_ti5" MouseDown="nvt_MouseDown" Points="243, 74 242, 63 236, 53 231, 55 236, 61 231, 66 240, 68" Fill="Firebrick" />
+				<Polygon Name="nv_ti6" MouseDown="nvt_MouseDown" Points="241, 98 238, 102 239, 107 244, 105 245, 99 251, 99 251, 107 259, 109 256, 99 248, 97 247, 87 238, 82 237, 87 232, 94 " Fill="Firebrick" />
+				<Polygon Name="nv_ti7" MouseDown="nvt_MouseDown" Points="248, 60 248, 65 251, 72 251, 77 257, 75 251, 72 255, 68 254, 62" Fill="Firebrick" />
+				<Polygon Name="nv_ti8" MouseDown="nvt_MouseDown" Points="243, 166 252, 177 249, 180 236, 175 240, 172 239, 169" Fill="Firebrick" />
+				<Polygon Name="nv_bfi" MouseDown="nvt_MouseDown" Points="278, 120 287, 117 283, 129 287, 139 290, 135 287, 130 287, 123 291, 118 297, 116 312, 114 319, 122 305, 126 305, 133 309, 130 311, 130 312, 125 315, 123 323, 126 333, 134 337, 131 338, 137 342, 135 353, 135 353, 141 359, 140 359, 147 365, 146 362, 151 364, 155 378, 159 379, 155 382, 159 387, 160 392, 160 392, 165 400, 160 400, 173 395, 177 402, 184 395, 185 388, 179 378, 176 379, 187 384, 187 395, 193 403, 201 406, 210 400, 212 388, 209 385, 209 389, 213 399, 217 405, 219 406, 223 391, 224 386, 223 382, 221 379, 224 372, 221 372, 214 367, 216 355, 211 341, 219 335, 211 339, 209 338, 205 343, 205 355, 198 348, 194 352, 185 353, 177 346, 169 337, 165 333, 169 331, 168 331, 161 314, 151 318, 158 315, 161 313, 158 308, 158 295, 160 290, 161 286, 157 285, 160 279, 158 276, 151 283, 151 281, 148 272, 147 274, 130 277, 121" Fill="Firebrick" />
+				<Polygon Name="nv_ti9" MouseDown="nvt_MouseDown" Points="338, 172 341, 180 335, 183 332, 184 331, 179 332, 172 336, 172" Fill="Firebrick" />
+				<Polygon Name="nv_ti10" MouseDown="nvt_MouseDown" Points="312, 247 316, 248 319, 249 324, 241 324, 239 316, 241" Fill="Firebrick" />
 
-						<Polygon Name="nb" MouseDown="nb_MouseDown"  Points="459, 380 462, 371 465, 371 467, 372 475, 367 481, 370 487, 365 488, 375 491, 375 497, 379 504, 379 501, 385 498, 385 492, 397 482, 402 475, 399 468, 383 462, 382" Fill="Gold" />
+				<Polygon Name="mb" MouseDown="mb_MouseDown" Points="213, 278 255, 281 256, 290 256, 294 264, 295 268, 304 270, 314 272, 313 279, 310 290, 314 253, 362 253, 408 204, 406" Fill="YellowGreen" />
 
-						<Polygon Name="ns" MouseDown="ns_MouseDown" Points="503, 380 508, 380 518, 377 520, 374 524, 374 519, 367 523, 356 525, 359 526, 364 533, 362 533, 365 525, 374 529, 376 514, 394 510, 394 508, 398 511, 402 504, 414 501, 413 496, 411 496, 406 503, 392 506, 391 509, 386 502, 390 501, 384" Fill="Purple" />
+				<Polygon Name="on" MouseDown="on_MouseDown" Points="289, 314 303, 324 310, 324 318, 328 339, 329 343, 346 344, 350 363, 368 367, 367 377, 411 387, 422 404, 423 412, 425 424, 419 425, 426 407, 443 411, 444 387, 458 393, 458 396, 462 384, 468 376, 471 367, 480 362, 481 360, 478 365, 477 366, 468 370, 463 370, 448 367, 440 375, 446 380, 446 383, 443 371, 430 347, 432 341, 429 337, 425 337, 421 332, 415 328, 415 322, 408 309, 405 301, 413 298, 418 287, 414 283, 419 278, 413 267, 412 257, 411 255, 404 253, 404 253, 360 " Fill="Orange" />
 
-						<Polygon Name="nf" MouseDown="nf_MouseDown" Points="422, 235 429, 241 436, 246 437, 250 441, 250 448, 252 450, 258 455, 258 457, 268 464, 269 470, 269 471, 275 479, 270 485, 270 488, 269 494, 268 489, 280 484, 286 485, 292 489, 285 489, 280 492, 279 492, 274 496, 273 499, 279 503, 273 510, 274 515, 284 519, 288 518, 297 525, 290 529, 315 530, 307 535, 307 535, 310 542, 310 543, 306 553, 303 553, 309 557, 311 559, 307 561, 319 563, 318 565, 311 568, 317 572, 316 575, 327 572, 328 569, 323 568, 329 563, 323 559, 319 560, 326 559, 334 552, 337 555, 327 552, 330 548, 329 541, 337 528, 345 525, 344 525, 334 523, 334 526, 325 523, 324 520, 302 521, 295 512, 297 511, 293 471, 318 466, 315 468, 323 466, 327  452, 323  448, 320 442, 319 441, 314 435, 308 433, 305 435, 289 437, 288 444, 292 447, 290 454, 289 455, 284 446, 277 440, 266 440, 259 437, 260 430, 254 430, 249 428, 249 420, 235 " Fill="RoyalBlue" />
+				<Polygon Name="qc" MouseDown="pq_MouseDown" Points="367, 368 372, 362 371, 353 356, 330 364, 322 370, 310 371, 301 366, 291 359, 285 353, 284 351, 281 355, 266 348, 256 348, 249 345, 243 346, 239 358, 238 365, 234 378, 239 379, 241 392, 240 402, 260 401, 264 407, 260 414, 264 421, 253 420, 245 420, 236 426, 245 432, 248 433, 257 440, 258 442, 268 447, 276 451, 276 455, 283 455, 291 451, 290 446, 291 445, 294 436, 291 434, 298 434, 305 442, 312 443, 319 445, 319 447, 315 452, 323 467, 325 464, 313 471, 317 511, 293 515, 299 508, 308 505, 323 493, 330 461, 348 460, 359 457, 360 452, 366 447, 389 442, 396 449, 391 453, 380 459, 368 476, 350 484, 352 486, 358 481, 364 477, 366 473, 368 469, 372 463, 372 457, 385 455, 401 457, 402 452, 413 449, 419 424, 426 424, 422 422, 421 412, 426 407, 424 385, 423 377, 414 366, 367 " Fill="CadetBlue" />
+				<Polygon Name="qc_qi" MouseDown="pq_MouseDown" Points="478, 343 485, 339 493, 339 501, 339 500, 342 492, 345 486, 344 479, 342" Fill="CadetBlue" />
 
-						<Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
-					</Grid>
+				<Polygon Name="nb" MouseDown="nb_MouseDown"  Points="459, 380 462, 371 465, 371 467, 372 475, 367 481, 370 487, 365 488, 375 491, 375 497, 379 504, 379 501, 385 498, 385 492, 397 482, 402 475, 399 468, 383 462, 382" Fill="Gold" />
 
-		<FlowDocumentReader Name="flowStats" ViewingMode="Page" MinZoom="100" IsFindEnabled ="False" IsScrollViewEnabled="True" IsTwoPageViewEnabled="False"  UseLayoutRounding="True" DockPanel.Dock="Right">
-			<FlowDocumentReader.Resources>
-				<Style TargetType="TableCell">
-					<Setter Property="TextAlignment" Value="Center"/>
-					<Setter Property="FontSize" Value="12" />
-					<Setter Property="FontFamily" Value="Arial" />
-					<Setter Property="Foreground" Value="White" />
-					
-				</Style>
-			</FlowDocumentReader.Resources>
-			<FlowDocument Name="flowDoc">
-				
-   
-			</FlowDocument>
-		</FlowDocumentReader>
+				<Polygon Name="ns" MouseDown="ns_MouseDown" Points="503, 380 508, 380 518, 377 520, 374 524, 374 519, 367 523, 356 525, 359 526, 364 533, 362 533, 365 525, 374 529, 376 514, 394 510, 394 508, 398 511, 402 504, 414 501, 413 496, 411 496, 406 503, 392 506, 391 509, 386 502, 390 501, 384" Fill="Purple" />
+
+				<Polygon Name="nf" MouseDown="nf_MouseDown" Points="422, 235 429, 241 436, 246 437, 250 441, 250 448, 252 450, 258 455, 258 457, 268 464, 269 470, 269 471, 275 479, 270 485, 270 488, 269 494, 268 489, 280 484, 286 485, 292 489, 285 489, 280 492, 279 492, 274 496, 273 499, 279 503, 273 510, 274 515, 284 519, 288 518, 297 525, 290 529, 315 530, 307 535, 307 535, 310 542, 310 543, 306 553, 303 553, 309 557, 311 559, 307 561, 319 563, 318 565, 311 568, 317 572, 316 575, 327 572, 328 569, 323 568, 329 563, 323 559, 319 560, 326 559, 334 552, 337 555, 327 552, 330 548, 329 541, 337 528, 345 525, 344 525, 334 523, 334 526, 325 523, 324 520, 302 521, 295 512, 297 511, 293 471, 318 466, 315 468, 323 466, 327  452, 323  448, 320 442, 319 441, 314 435, 308 433, 305 435, 289 437, 288 444, 292 447, 290 454, 289 455, 284 446, 277 440, 266 440, 259 437, 260 430, 254 430, 249 428, 249 420, 235 " Fill="RoyalBlue" />
+
+				<Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
+			</Grid>
+
+			<FlowDocumentReader Name="flowStats" ViewingMode="Page" MinZoom="100" IsFindEnabled ="False" IsScrollViewEnabled="True" IsTwoPageViewEnabled="False"  UseLayoutRounding="True" DockPanel.Dock="Right">
+				<FlowDocumentReader.Resources>
+					<Style TargetType="TableCell">
+						<Setter Property="TextAlignment" Value="Center"/>
+						<Setter Property="FontSize" Value="12" />
+						<Setter Property="FontFamily" Value="Arial" />
+						<Setter Property="Foreground" Value="White" />
+
+					</Style>
+				</FlowDocumentReader.Resources>
+				<FlowDocument Name="flowDoc">
+
+
+				</FlowDocument>
+			</FlowDocumentReader>
 
 		</DockPanel>
 
 		<DockPanel Name="dckLogin" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" LastChildFill="False">
-		 
+
 			<StackPanel Orientation="Vertical">
 				<Image Source="logo.gif" Height="100" Width="100" />
 				<TextBlock  Foreground="White" Margin="5" FontSize="20">Canadian Education Strategy Program</TextBlock>
@@ -160,24 +162,24 @@
 						<TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="5">Can't login? Call Sean at 123-456.</TextBlock>
 						<TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="5">Can't get ahold of him? Try his mom at 321-7654</TextBlock>
 					</StackPanel>
-					
+
 				</StackPanel>
- 
+
 			</StackPanel>
 
 		</DockPanel>
 		<DockPanel x:Name="dckDataEntry" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
 			<StackPanel DockPanel.Dock="Left" Orientation="Vertical" Name="navScreen">
-					<StackPanel.Resources>
-						<Style TargetType="{x:Type Button}">
-							<Setter Property="Foreground" Value="White"/>
-							<Setter Property="Padding" Value="5"/>
-							<Setter Property="BorderBrush" Value="Transparent"/>
-							<Setter Property="Background" Value="#0A2846" />
-							<Setter Property="HorizontalContentAlignment" Value="Left"/>
-						</Style>
-                   </StackPanel.Resources>
-                <!--<Button>Alberta</Button>
+				<StackPanel.Resources>
+					<Style TargetType="{x:Type Button}">
+						<Setter Property="Foreground" Value="White"/>
+						<Setter Property="Padding" Value="5"/>
+						<Setter Property="BorderBrush" Value="Transparent"/>
+						<Setter Property="Background" Value="#0A2846" />
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+					</Style>
+				</StackPanel.Resources>
+				<!--<Button>Alberta</Button>
 					<Button>British Columbia</Button>
 					<Button>Manitoba</Button>
 					<Button>New Brunswick</Button>
@@ -188,8 +190,8 @@
 					<Button>Quebec</Button>
 					<Button Background="#1450C8">Saskatchewan</Button>-->
 
-            </StackPanel>
-				<Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
+			</StackPanel>
+			<Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
 				<Grid.Resources>
 					<Style TargetType="{x:Type Label}">
 						<Setter Property="Foreground" Value="White"/>
@@ -231,33 +233,33 @@
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Discipline </Label>
-				<Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Field </Label>
-                <ComboBox x:Name="cmbDiscipline" SelectionChanged="cmbDiscipline_SelectChanged"  Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Discipline</Label>
+				<Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Field</Label>
+				<ComboBox x:Name="cmbDiscipline" SelectionChanged="cmbDiscipline_SelectChanged"  Width="100" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
 				<ComboBox x:Name="cmbField" SelectionChanged="cmbField_SelectionChanged" Width="100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Projection </Label>
+				<Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Projection</Label>
 				<ComboBox x:Name="cmbProjection" Width="100" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Increase </Label>
+				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Increase</Label>
 				<RadioButton Grid.Column="1" Grid.Row="4" Name="rdUp" GroupName="rdForecast"/>
 
-				<Label  Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Decrease </Label>
+				<Label  Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Decrease</Label>
 				<RadioButton Grid.Column="1" Grid.Row="5" Name="rdDown" GroupName="rdForecast"/>
 
-				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Forecast </Label>
+				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Forecast</Label>
 				<TextBox x:Name="txtForecast" Grid.Column="1" Grid.Row="6" Width="100" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">Current Employment</Label>
 				<TextBox x:Name="txtCurrentEmployment" Grid.Column="1" Grid.Row="8" Width="100" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right">Average Salary </Label>
+				<Label Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right">Average Salary</Label>
 				<TextBox x:Name="txtAverageSalary" Grid.Column="1" Grid.Row="9" Width="100" HorizontalAlignment="Left"/>
 
 				<Button Grid.Column="0" Grid.Row="11" Click="SubmitJobsData">Accept</Button>
 				<Button Grid.Column="1" Grid.Row="11" HorizontalAlignment="Left" Width="100" Click="ClearJobsData">Cancel</Button>
 			</Grid>
-			
+
 			<Grid x:Name="grdEducation" Margin="30" Visibility="Collapsed">
 				<Grid.Resources>
 					<Style TargetType="{x:Type Label}">
@@ -296,32 +298,32 @@
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">University </Label>
-                <ComboBox x:Name="cmbUniversity" Width="180" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">University</Label>
+				<ComboBox x:Name="cmbUniversity" Width="180" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Program </Label>
-                <ComboBox x:Name="cmbRelatedCollege" Width="180" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Program</Label>
+				<ComboBox x:Name="cmbRelatedCollege" Width="180" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
 
-                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Field</Label>
-                <ComboBox x:Name="cmbRelatedProgram" Width="180" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Field</Label>
+				<ComboBox x:Name="cmbRelatedProgram" Width="180" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left"/>
 
-                <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Seats </Label>
-                <TextBox x:Name="txtSeats" Width="180" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Seats</Label>
+				<TextBox x:Name="txtSeats" Width="180" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Current Enrollment</Label>
-                <TextBox x:Name="txtCurrentEnrollment" Width="180" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtCurrentEnrollment" Width="180" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Graduates per Year </Label>
-                <TextBox x:Name="txtGraduatesPerYear" Width="180" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Graduates per Year</Label>
+				<TextBox x:Name="txtGraduatesPerYear" Width="180" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">Job Attainment </Label>
-                <TextBox x:Name="txtJobAttainment" Width="180" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">Job Attainment</Label>
+				<TextBox x:Name="txtJobAttainment" Width="180" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left"/>
 
-				<Label Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">Tuition </Label>
-                <TextBox x:Name="txtTuition" Width="180" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left"/>
+				<Label Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">Tuition</Label>
+				<TextBox x:Name="txtTuition" Width="180" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left"/>
 
 				<Button Grid.Column="0" Grid.Row="10" Click="SubmitEducationData">Accept</Button>
 				<Button Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" Width="100" Click="ClearEducationData">Cancel</Button>
