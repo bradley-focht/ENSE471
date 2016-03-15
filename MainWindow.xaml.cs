@@ -48,9 +48,9 @@ namespace WpfTest
 			ces = new newCesModel();
 
 			//initial screen setup ... such a bad way of doing it
-			dckLogin.Visibility = Visibility.Visible;
+			grdLogin.Visibility = Visibility.Visible;
 			dckMap.Visibility = Visibility.Collapsed;
-			dckTopButtons.Visibility = Visibility.Collapsed;
+			grdTopButtons.Visibility = Visibility.Collapsed;
 			btnNavPri.Visibility = Visibility.Collapsed;
 			btnNavSec.Visibility = Visibility.Collapsed;
 			btnNavTitle.Visibility = Visibility.Collapsed;
@@ -504,7 +504,7 @@ namespace WpfTest
 		/// <param name="sender">Object sending the event</param>
 		private void ShowScreen(object sender)
 		{
-			dckLogin.Visibility = Visibility.Collapsed;
+			grdLogin.Visibility = Visibility.Collapsed;
 			dckMap.Visibility = Visibility.Collapsed;
 			dckDataEntry.Visibility = Visibility.Collapsed;
 			grdEducation.Visibility = Visibility.Collapsed;
@@ -527,7 +527,7 @@ namespace WpfTest
 			else if (sender.Equals(btnLogin))
 			{
 				dckMap.Visibility = Visibility.Visible;
-				dckTopButtons.Visibility = Visibility.Visible;
+				grdTopButtons.Visibility = Visibility.Visible;
 				btnNavPri.Visibility = Visibility.Visible;
 				btnNavSec.Visibility = Visibility.Visible;
 				btnNavTitle.Visibility = Visibility.Visible;

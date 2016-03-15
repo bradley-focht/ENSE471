@@ -41,7 +41,7 @@
 		</Style>
 	</Window.Resources>
 	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
-		<Grid Name="dckTopButtons" DockPanel.Dock="Top">
+		<Grid Name="grdTopButtons" DockPanel.Dock="Top">
 			<Grid.Resources>
 				<Style TargetType="{x:Type Button}">
 					<Setter Property="Foreground" Value="White"/>
@@ -153,9 +153,11 @@
 
 		</DockPanel>
 
-		<DockPanel Name="dckLogin" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" LastChildFill="False">
-
-			<StackPanel Orientation="Vertical">
+		<Grid Name="grdLogin" Width="1200">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<Image Source="logo.gif" Height="100" Width="100" />
 				<TextBlock  Foreground="White" Margin="5" FontSize="20">Canadian Education Strategy Program</TextBlock>
 				<StackPanel Orientation="Horizontal">
@@ -170,12 +172,10 @@
 						<TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="5">Can't login? Call Sean at 123-456.</TextBlock>
 						<TextBlock HorizontalAlignment="Left" Foreground="Wheat" Margin="5">Can't get ahold of him? Try his mom at 321-7654</TextBlock>
 					</StackPanel>
-
 				</StackPanel>
-
 			</StackPanel>
+		</Grid>
 
-		</DockPanel>
 		<DockPanel x:Name="dckDataEntry" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
 			<StackPanel DockPanel.Dock="Left" Orientation="Vertical" Name="navScreen">
 				<StackPanel.Resources>
