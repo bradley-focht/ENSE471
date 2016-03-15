@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
 
@@ -36,6 +36,8 @@ namespace WpfTest
 		private int jbProvSelectedId;
 		private int jbProgSelectedId;
 
+		//education data variables
+		private int edUnivSelectedId;
 
 
 		public MainWindow()
@@ -61,10 +63,10 @@ namespace WpfTest
 
 			//STUFF TO COMMENT OUT FOR SEAN SO HE CAN USE THIS APP TOO
 			//Education data buttons
-			//ed_buildPriMenu();
-			//BuildProgramEntry();
-			//BuildUniv();
-
+			ed_buildPriMenu();
+			BuildProgramEntry();
+			BuildUniv();
+			map_buildPriMenu();
 
 			//clear the table
 			table_buildCanadaWideAggregation();
@@ -73,7 +75,7 @@ namespace WpfTest
 			dckMain.Background = defaultBack;
 
 			//build menu
-			//map_buildPriMenu();
+			
 			//clear map of default colours
 			map_clearColours();
 
@@ -125,6 +127,8 @@ namespace WpfTest
 			jbProvSelectedId = int.Parse(m.Value.ToString());
 
 			ed_buildPriMenu(jbProvSelectedId);
+
+			BuildUniv();
 		}
 
 		/// <summary>
@@ -149,21 +153,25 @@ namespace WpfTest
 
 				//add a bogey
 				ComboBoxItem b = new ComboBoxItem();
-				b.Content = "---select---";
-				b.Name = "bogey";
+				ComboBoxItem b2 = new ComboBoxItem();		//can't reuse the same, has to be detached
+				b.Content = b2.Content = "---select---";
+				b.Name = b2.Name = "bogey";
 				cmbDiscipline.Items.Add(b);
+				cmbRelatedCollege.Items.Add(b2);
 
 				foreach (var p in programs)
 				{
 					ComboBoxItem c = new ComboBoxItem();
-					c.Content = p.name;
-					c.Name = "cmbProgramId_" + p.id.ToString();
+					ComboBoxItem c2 = new ComboBoxItem();
+					c.Content = c2.Content = p.name;
+					c.Name = c2.Name = "cmbProgramId_" + p.id.ToString();
 
 					cmbDiscipline.Items.Add(c);
+					cmbRelatedCollege.Items.Add(c2);
 				}
 			}
 			cmbDiscipline.SelectedValue = cmbDiscipline.Items[0];
-
+			cmbDiscipline.SelectedValue = cmbDiscipline.Items[0];
 		}
 
 		//map functions
@@ -407,7 +415,11 @@ namespace WpfTest
 			}
 
 		}
-		//context menu
+		/// <summary>
+		/// This is the context menu that pops up for each province
+		/// </summary>
+		/// <param name="prov"></param>
+		/// <param name="acronym"></param>
 		private void showPopupMenu(string prov, string acronym)
 		{
 			if (selectedId == 0)
@@ -416,7 +428,6 @@ namespace WpfTest
 			ContextMenu c = new ContextMenu();
 			c.Style = this.FindResource("cxMenuStyle") as Style;
 			//title
-
 
 			using (var context = new newCesModel())
 			{
@@ -431,14 +442,14 @@ namespace WpfTest
 							   select new { d.demand }).FirstOrDefault();
 
 				var universities = from u in ces.universities
-								   where u.province.acronym == acronym
+								   join p in ces.provinces on u.province_id equals p.id
+								   where p.acronym.Equals(acronym)
 								   orderby u.name ascending
 								   select new { u.id, u.name };
 
 				if (demands == null)
 				{
 					return;
-
 				}
 				else { }
 
@@ -486,17 +497,16 @@ namespace WpfTest
 				m.Items.Add(n);
 				n.Items.Add(o);
 				m.Header = "want this job?";
-				n.Header = "go to this school";
-				o.Header = "here is some more info";
+				foreach(var u in universities)
+				{
+					MenuItem i = new MenuItem();
+					i.Header = u.name;
+					m.Items.Add(i);
+				}
 				c.StaysOpen = true;
-
 				c.Items.Add(m);
-
 			}
-
-
 			c.IsOpen = true;
-
 		}
 
 		/// <summary>
@@ -747,6 +757,7 @@ namespace WpfTest
 
 				context.job_demand.Add(j);
 				context.SaveChanges();
+				ClearJobsData(sender, e);
 			}
 		}
 		/// <summary>
@@ -764,6 +775,7 @@ namespace WpfTest
 			txtForecast.Text = String.Empty;
 			txtCurrentEmployment.Text = String.Empty;
 			txtAverageSalary.Text = String.Empty;
+			
 		}
 
 		/// <summary>
@@ -812,16 +824,12 @@ namespace WpfTest
 		{
 			foreach (ComboBoxItem s in e.AddedItems) //i just want the first item but whatever
 			{
-
 				if (s.Name == "bogey")
 					return;
-
 				Match m = new Regex(@"\d+").Match(s.Name);
 				BuildFieldEntry(int.Parse(m.Value.ToString()));
-
 				return;
 			}
-
 		}
 		/// <summary>
 		/// builds the field combo box on the jobs scren
@@ -859,14 +867,25 @@ namespace WpfTest
 			cmbField.SelectedItem = cmbField.Items[0];
 		}
 
+		/// <summary>
+		/// university list on educatin page. builds list based on selected province in jbProvSelectedId variable
+		/// </summary>
 		private void BuildUniv()
 		{
 			cmbUniversity.Items.Clear();
+
+			ComboBoxItem i = new ComboBoxItem();
+			i.Content = "---select---";
+			i.Name = "bogey";
+			cmbUniversity.Items.Add(i);
+
+			cmbUniversity.SelectedValue = cmbUniversity.Items[0];
 
 			{
 				using (var context = new newCesModel())
 				{
 					var universities = from p in ces.universities
+									   where p.province_id == jbProvSelectedId
 									   select new { p.name, p.id };
 
 					//add a bogey
@@ -885,13 +904,30 @@ namespace WpfTest
 					}
 				}
 			}
+
+		}
+		private void BuildDisc()
+		{
+			using (var context = new newCesModel())
+			{
+				var disciplines = from d in ces.university_programs
+								  where d.university_id == edUnivSelectedId
+								  select new { d.program_id, d.program.name };
+
+				foreach (var d in disciplines)
+				{
+					ComboBoxItem c = new ComboBoxItem();
+					c.Content = d.name;
+					c.Name = "cmbDiscItem_" + d.program_id;
+					cmbRelatedProgram.Items.Add(c);
+				}
+			}
 		}
 
 		private void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			foreach (ComboBoxItem s in e.AddedItems) //i just want the first item but whatever
 			{
-
 				if (s.Name == "bogey")
 					return;
 
@@ -899,7 +935,68 @@ namespace WpfTest
 				jbProgSelectedId = int.Parse(m.Value.ToString());
 				return;
 			}
+		}
+		/// <summary>
+		/// education screen, select disciplines available at this university
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void cmbUniversity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
 
+			
+			/* foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
+			{
+				Match m = new Regex(@"\d+").Match(s.Name);
+				edUnivSelectedId = int.Parse(m.Value.ToString());
+				BuildDisc();
+				return;
+			} */
+		}
+
+		private void cmbRelatedCollege_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
+			{
+				Match m = new Regex(@"\d+").Match(s.Name);
+				int id = int.Parse(m.Value.ToString());
+				BuildEdFields(id);
+				return;
+
+			}
+			
+		}
+
+		void BuildEdFields(int progId=0)
+		{
+			cmbRelatedProgram.Items.Clear();
+			if (progId == 0)
+				return;
+			else
+			{
+				using (var context = new newCesModel())
+				{
+					var programs = from p in ces.programs
+								   where p.parent == progId
+								   select new { p.name, p.id };
+
+					//add a bogey
+					ComboBoxItem b = new ComboBoxItem();
+					b.Content = "---select---";
+					b.Name = "bogey";
+					cmbRelatedProgram.Items.Add(b);
+
+					foreach (var p in programs)
+					{
+						ComboBoxItem c = new ComboBoxItem();
+						c.Content = p.name;
+						c.Name = "cmbFieldId_" + p.id.ToString();
+
+						cmbRelatedProgram.Items.Add(c);
+					}
+				}
+			}
+			cmbRelatedProgram.SelectedItem = cmbRelatedProgram.Items[0];
 		}
 	}
 }
