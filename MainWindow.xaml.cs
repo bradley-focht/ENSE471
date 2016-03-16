@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
+using System.Windows.Media.Animation;
 
 namespace WpfTest
 {
@@ -30,6 +31,8 @@ namespace WpfTest
 		SolidColorBrush midToneBack = new SolidColorBrush(Color.FromRgb(10, 40, 70));
 		SolidColorBrush hlightBack = new SolidColorBrush(Color.FromRgb(20, 80, 200));
 		SolidColorBrush hlightLightBack = new SolidColorBrush(Color.FromRgb(120, 200, 255));
+		private SolidColorBrush saveBrush = new SolidColorBrush();
+		ColorAnimation saveAnimation = new ColorAnimation();
 		private int selectedId; //save the state for selected button on a map
 
 		//Jobs Data variables, easier to figure out
@@ -83,6 +86,23 @@ namespace WpfTest
 			map_buildPriMenuTitleSel();
 
 			BuildDataEntryGrids();
+			SetupSaveAnimations();
+		}
+
+		private void SetupSaveAnimations()
+		{
+			saveBrush = new SolidColorBrush();
+			saveBrush.Color = Colors.Blue;
+
+			saveAnimation.From = midToneBack.Color;
+			saveAnimation.To = Colors.Green;
+			saveAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+			saveAnimation.AutoReverse = true;
+
+			saveBrush.BeginAnimation(SolidColorBrush.ColorProperty, saveAnimation);
+
+			btnEducationSave.Background = saveBrush;
+			btnJobsSave.Background = saveBrush;
 		}
 
 		private void ed_buildPriMenu(int clickedBtn = 0)
@@ -731,11 +751,15 @@ namespace WpfTest
 			long wage = 0;
 			try
 			{
-				demand = int.Parse(txtForecast.Text) % 100;
-				employment = int.Parse(txtCurrentEmployment.Text) % 100;
+				demand = int.Parse(txtForecast.Text)%100;
+				employment = int.Parse(txtCurrentEmployment.Text)%100;
 				wage = long.Parse(txtAverageSalary.Text);
 			}
-			catch (Exception ex) { return; }
+			catch (Exception ex)
+			{
+				MessageBox.Show("Please ensure Forecast, Employment, and Salary Data is valid.");
+				return;
+			}
 
 			if (demand > 100)
 				txtForecast.Text = "100";
@@ -756,9 +780,17 @@ namespace WpfTest
 				j.employment = employment;
 
 				context.job_demand.Add(j);
-				context.SaveChanges();
-				ClearJobsData(sender, e);
+				if (context.SaveChanges() > 0)
+				{
+					saveBrush.BeginAnimation(SolidColorBrush.ColorProperty, saveAnimation);
+					ClearJobsData(sender, e);
+				}
+				else
+				{
+					MessageBox.Show("Error saving changes.");
+				}
 			}
+
 		}
 		/// <summary>
 		/// Clears all fields in the jobs grid
@@ -794,6 +826,9 @@ namespace WpfTest
 			{
 				MessageBox.Show("Success!");
 				ClearEducationData(sender, e);
+
+				//Run this when a save is made... Thanks
+				saveBrush.BeginAnimation(SolidColorBrush.ColorProperty, saveAnimation);
 			}
 			else
 				MessageBox.Show("Error Saving Data.");
