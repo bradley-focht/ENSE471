@@ -34,13 +34,15 @@ namespace WpfTest
 		private SolidColorBrush saveBrush = new SolidColorBrush();
 		ColorAnimation saveAnimation = new ColorAnimation();
 		private int selectedId; //save the state for selected button on a map
-
+		private string programSel;
 		//Jobs Data variables, easier to figure out
 		private int jbProvSelectedId;
 		private int jbProgSelectedId;
 
 		//education data variables
 		private int edUnivSelectedId;
+		private int edProgSelectedId;
+
 
 
 		public MainWindow()
@@ -63,6 +65,8 @@ namespace WpfTest
 			//set background colour
 			dckMain.Background = defaultBack;
 			selectedId = 0;
+			edUnivSelectedId = 0;
+			edProgSelectedId = 0;
 
 			//STUFF TO COMMENT OUT FOR SEAN SO HE CAN USE THIS APP TOO
 			//Education data buttons
@@ -412,29 +416,7 @@ namespace WpfTest
 
 		}
 
-		//table in top right corner
-		//sending a zero hides the table - still takes up the space, not collapsed
-		private void table_buildCanadaWideAggregation(int progId = 0)
-		{
-			if (progId == 0)
-			{
-				Section s = new Section();
-				Paragraph p0 = new Paragraph(new Run("Canada Education Strategy"));
-				Paragraph p1 = new Paragraph(new Run("Select program then click on the provinces to view information"));
-				Paragraph p2 = new Paragraph(new Run("Other useful info..... hardcoded in"));
-				Paragraph p3 = new Paragraph(new Run("cause there is no better way..."));
-				p0.Foreground = new SolidColorBrush(Color.FromRgb(250, 250, 125));
-				p1.Foreground = p2.Foreground = p3.Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 100));
-				p0.FontSize += 10;
-				s.Blocks.Add(p0);
-				s.Blocks.Add(p1);
-				s.Blocks.Add(p2);
-				s.Blocks.Add(p3);
-				s.TextAlignment = TextAlignment.Left;
-				flowDoc.Blocks.Add(s);
-			}
 
-		}
 		/// <summary>
 		/// This is the context menu that pops up for each province
 		/// </summary>
@@ -467,17 +449,27 @@ namespace WpfTest
 								   orderby u.name ascending
 								   select u;
 				var programs = from w in ces.university_programs
+							   orderby w.id descending
 							   select w;
 				
 				List<MenuItem> arr = new List<MenuItem>();
 				foreach (var prog in programs)
 				{
 					MenuItem y = new MenuItem();
+
 					StackPanel st = new StackPanel();
-					TextBlock t1 = new TextBlock();
-					t1.Text = "Enrollment" + prog.current_enrollment;
-					t1.Text = "\nAvailable Seats" + prog.available_seats;
+					st.Orientation = Orientation.Vertical;
+
+					y.Header = st;
+
+					TextBlock t2 = new TextBlock();
+
+
+					t2.Text = "Enrollment " + prog.current_enrollment + " of " + prog.available_seats + " available Seats ";
+
 					y.Name = "id_" + prog.university_id.ToString();
+					y.Header = t2;
+
 					arr.Add(y);
 				}
 
@@ -833,20 +825,35 @@ namespace WpfTest
 		/// <param name="e"></param>
 		private void SubmitEducationData(object sender, RoutedEventArgs e)
 		{
-			bool saved = false;
 
-			//TODO: Do stuff for submitting Education Query
-
-			if (saved)
-			{
-				MessageBox.Show("Success!");
+				using (var context = new newCesModel())
+				{
+					var j = new university_programs();
+					j.program_id = edUnivSelectedId;
+					j.university_id = edUnivSelectedId;
+					try {
+						j.available_seats = long.Parse(txtSeats.Text);
+						j.current_enrollment = long.Parse(txtCurrentEnrollment.Text);
+					} catch (Exception exc)
+					{
+						MessageBox.Show("invalid data entered");
+					}
+					context.university_programs.Add(j);
+					if (context.SaveChanges() > 0)
+					{
+						saveBrush.BeginAnimation(SolidColorBrush.ColorProperty, saveAnimation);
+						ClearJobsData(sender, e);
+					}
+					else
+					{
+						MessageBox.Show("Error saving changes.");
+					}
+				}
 				ClearEducationData(sender, e);
 
 				//Run this when a save is made... Thanks
 				saveBrush.BeginAnimation(SolidColorBrush.ColorProperty, saveAnimation);
-			}
-			else
-				MessageBox.Show("Error Saving Data.");
+
 		}
 
 		/// <summary>
@@ -856,8 +863,10 @@ namespace WpfTest
 		/// <param name="e"></param>
 		private void ClearEducationData(object sender, RoutedEventArgs e)
 		{
-			cmbUniversity.SelectedItem = null;
-			cmbRelatedProgram.SelectedItem = null;
+			cmbUniversity.SelectedValue = cmbUniversity.Items[0];
+
+			cmbRelatedProgram.SelectedItem = cmbRelatedProgram.Items[0];
+			cmbRelatedCollege.SelectedItem = cmbRelatedCollege.Items[0];
 			txtSeats.Text = String.Empty;
 			txtCurrentEnrollment.Text = String.Empty;
 			txtGraduatesPerYear.Text = String.Empty;
@@ -972,7 +981,6 @@ namespace WpfTest
 				}
 			}
 		}
-
 		private void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			foreach (ComboBoxItem s in e.AddedItems) //i just want the first item but whatever
@@ -992,7 +1000,17 @@ namespace WpfTest
 		/// <param name="e"></param>
 		private void cmbUniversity_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			//TODO should reset the fields below it in the form
+
+			foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
+			{
+				if (s.Name == "bogey")
+					return;
+				
+				Match m = new Regex(@"\d+").Match(s.Name);
+				
+				edUnivSelectedId = int.Parse(m.Value.ToString());
+				return;
+			}
 		}
 
 		private void cmbRelatedCollege_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1001,6 +1019,7 @@ namespace WpfTest
 			{
 				Match m = new Regex(@"\d+").Match(s.Name);
 				int id = int.Parse(m.Value.ToString());
+				edProgSelectedId = id;
 				BuildEdFields(id);
 				return;
 			}
