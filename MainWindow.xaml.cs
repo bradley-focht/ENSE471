@@ -72,7 +72,7 @@ namespace WpfTest
 			map_buildPriMenu();
 
 			//clear the table
-			table_buildCanadaWideAggregation();
+		//	table_buildCanadaWideAggregation();
 			//grid margin 
 			gridMap.Margin = new Thickness(10, 10, 10, 10);
 			dckMain.Background = defaultBack;
@@ -465,7 +465,7 @@ namespace WpfTest
 								   join p in ces.provinces on u.province_id equals p.id
 								   where p.acronym.Equals(acronym)
 								   orderby u.name ascending
-								   select new { u.id, u.name };
+								   select u;
 
 				if (demands == null)
 				{
@@ -508,6 +508,8 @@ namespace WpfTest
 
 				//jobs data stuff
 				MenuItem m = new MenuItem();
+				m.Header = "Universities";
+				m.Style = this.FindResource("cxMenuItemStyle") as Style;
 
 				MenuItem n = new MenuItem();
 				n.Style = this.FindResource("cxMenuItemStyle") as Style;
@@ -516,7 +518,7 @@ namespace WpfTest
 
 				m.Items.Add(n);
 				n.Items.Add(o);
-				m.Header = "want this job?";
+
 				foreach(var u in universities)
 				{
 					MenuItem i = new MenuItem();
@@ -948,7 +950,6 @@ namespace WpfTest
 				var disciplines = from d in ces.university_programs
 								  where d.university_id == edUnivSelectedId
 								  select new { d.program_id, d.program.name };
-
 				foreach (var d in disciplines)
 				{
 					ComboBoxItem c = new ComboBoxItem();
@@ -978,15 +979,7 @@ namespace WpfTest
 		/// <param name="e"></param>
 		private void cmbUniversity_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-
-			
-			/* foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
-			{
-				Match m = new Regex(@"\d+").Match(s.Name);
-				edUnivSelectedId = int.Parse(m.Value.ToString());
-				BuildDisc();
-				return;
-			} */
+			//TODO should reset the fields below it in the form
 		}
 
 		private void cmbRelatedCollege_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -997,7 +990,6 @@ namespace WpfTest
 				int id = int.Parse(m.Value.ToString());
 				BuildEdFields(id);
 				return;
-
 			}
 			
 		}
