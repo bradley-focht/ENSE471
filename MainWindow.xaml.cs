@@ -446,6 +446,21 @@ namespace WpfTest
 								   where p.acronym.Equals(acronym)
 								   orderby u.name ascending
 								   select u;
+				var programs = from w in ces.university_programs
+							   select w;
+				
+				List<MenuItem> arr = new List<MenuItem>();
+				foreach (var prog in programs)
+				{
+					MenuItem y = new MenuItem();
+					StackPanel st = new StackPanel();
+					TextBlock t1 = new TextBlock();
+					t1.Text = "Enrollment" + prog.current_enrollment;
+					t1.Text = "\nAvailable Seats" + prog.available_seats;
+					y.Name = "id_" + prog.university_id.ToString();
+					arr.Add(y);
+				}
+
 
 				if (demands == null)
 				{
@@ -486,26 +501,24 @@ namespace WpfTest
 				c.Items.Add(mTitle);
 				c.Items.Add(dem);
 
-				//jobs data stuff
+				//Education stuff
 				MenuItem m = new MenuItem();
 				m.Header = "Universities";
 				m.Style = this.FindResource("cxMenuItemStyle") as Style;
-
-				MenuItem n = new MenuItem();
-				n.Style = this.FindResource("cxMenuItemStyle") as Style;
-				MenuItem o = new MenuItem();
-				o.Style = this.FindResource("cxMenuItemStyle") as Style;
-
-				m.Items.Add(n);
-				n.Items.Add(o);
-
-				foreach(var u in universities)
+				m.Width = c.Width;
+				foreach (var u in universities)
 				{
 					MenuItem i = new MenuItem();
 					i.Header = u.name;
 					m.Items.Add(i);
+					foreach (MenuItem g in arr)
+					{
+						if (g.Name == "id_" + u.id)
+							i.Items.Add(g);
+					}
+					
 				}
-				c.StaysOpen = true;
+				//Jobs stuff
 				c.Items.Add(m);
 			}
 			c.IsOpen = true;
