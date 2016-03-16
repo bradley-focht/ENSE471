@@ -7,7 +7,7 @@
 		mc:Ignorable="d"
 		Loaded="Window_Loaded"
 		ResizeMode="NoResize"
-		Title="Canadian Education Strategy" Height="620" Width="1200" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+		Title="Canadian Education Strategy" Height="620" Width="1000" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
 	<Window.Resources>
 		<Style x:Key="cxMenuItemStyle" TargetType="{x:Type MenuItem}">
 			<Setter Property="Background" Value="White"/>
@@ -40,7 +40,7 @@
 			<Setter Property="BorderBrush" Value="Transparent"/>
 		</Style>
 	</Window.Resources>
-	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1200" Height="620">
+	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1000" Height="620">
 		<Grid Name="grdTopButtons" DockPanel.Dock="Top">
 			<Grid.Resources>
 				<Style TargetType="{x:Type Button}">
@@ -135,8 +135,8 @@
 
 				<Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
 			</Grid>
-
-			<Image DockPanel.Dock="Right" VerticalAlignment="Top" Margin="10" Source="HintIcon.png" Height="30" Width="30" >
+            
+			<Image DockPanel.Dock="Right" VerticalAlignment="Top" Source="HintIcon.png" Height="45" Width="45" Margin="10 10 50 10" >
 				<Image.ToolTip>
 					<StackPanel Orientation="Vertical" Width="150">
 						<TextBlock>
@@ -144,7 +144,7 @@
 						</TextBlock>
 						<TextBlock TextWrapping="Wrap">
 						Select program then click on the provinces to view information. 
-						Other useful info..... hardcoded in because there is no better way...
+						
 						</TextBlock>
 					</StackPanel>
 				</Image.ToolTip>
@@ -168,7 +168,7 @@
 
 		</DockPanel>
 
-		<Grid Name="grdLogin" Width="1200">
+		<Grid Name="grdLogin" Width="1000">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
