@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
-using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Animation;
 
@@ -33,8 +24,10 @@ namespace WpfTest
 		SolidColorBrush hlightLightBack = new SolidColorBrush(Color.FromRgb(120, 200, 255));
 		private SolidColorBrush saveBrush = new SolidColorBrush();
 		ColorAnimation saveAnimation = new ColorAnimation();
+	
+		//saved for the map
 		private int selectedId; //save the state for selected button on a map
-		private string programSel;
+		
 		//Jobs Data variables, easier to figure out
 		private int jbProvSelectedId;
 		private int jbProgSelectedId;
@@ -43,7 +36,8 @@ namespace WpfTest
 		private int edUnivSelectedId;
 		private int edProgSelectedId;
 
-
+		//login info
+		private String username;
 
 		public MainWindow()
 		{
@@ -76,13 +70,11 @@ namespace WpfTest
 			map_buildPriMenu();
 
 			//clear the table
-		//	table_buildCanadaWideAggregation();
+			//table_buildCanadaWideAggregation();
 			//grid margin 
 			gridMap.Margin = new Thickness(10, 10, 10, 10);
 			dckMain.Background = defaultBack;
 
-			//build menu
-			
 			//clear map of default colours
 			map_clearColours();
 
@@ -109,6 +101,10 @@ namespace WpfTest
 			btnJobsSave.Background = saveBrush;
 		}
 
+		/// <summary>
+		/// builds the province buttons on the education screen
+		/// </summary>
+		/// <param name="clickedBtn">highlighted button</param>
 		private void ed_buildPriMenu(int clickedBtn = 0)
 		{
 			//clear the menu and start again
@@ -125,10 +121,10 @@ namespace WpfTest
 				foreach (var p in provinces)
 				{
 					Button b = new Button();
-					b.Name = "btn_Prov" + p.id;
+					b.Name = "btnProv_" + p.id;
 					b.Content = p.name;
 
-					if (clickedBtn == p.id)
+					if (clickedBtn == p.id)		//highlight button selection
 						b.Background = hlightBack;
 					else
 						b.Background = midToneBack;
@@ -297,13 +293,13 @@ namespace WpfTest
 						case "sk":
 							fillSk(c);
 							break;
-						case "Yk":
+						case "yk":
 							fillYk(c);
 							break;
-						case "Nv":
+						case "nv":
 							fillNvt(c);
 							break;
-						case "Nw":
+						case "nw":
 							fillNwt(c);
 							break;
 					}
@@ -449,6 +445,7 @@ namespace WpfTest
 								   orderby u.name ascending
 								   select u;
 				var programs = from w in ces.university_programs
+							   where w.program_id == selectedId
 							   orderby w.id descending
 							   select w;
 				
@@ -465,7 +462,7 @@ namespace WpfTest
 					TextBlock t2 = new TextBlock();
 
 
-					t2.Text = "Enrollment " + prog.current_enrollment + " of " + prog.available_seats + " available Seats ";
+					t2.Text = "Enrollment " + prog.current_enrollment + " of " + prog.available_seats + "  Seats ";
 
 					y.Name = "id_" + prog.university_id.ToString();
 					y.Header = t2;
@@ -526,12 +523,16 @@ namespace WpfTest
 					foreach (MenuItem g in arr)
 					{
 						if (g.Name == "id_" + u.id)
+						{
 							i.Items.Add(g);
-					}
-					
+							break;
+						}
+					}	
 				}
-				//Jobs stuff
 				c.Items.Add(m);
+
+				//Jobs stuff
+
 			}
 			c.IsOpen = true;
 		}
@@ -825,11 +826,10 @@ namespace WpfTest
 		/// <param name="e"></param>
 		private void SubmitEducationData(object sender, RoutedEventArgs e)
 		{
-
 				using (var context = new newCesModel())
 				{
 					var j = new university_programs();
-					j.program_id = edUnivSelectedId;
+					j.program_id = edProgSelectedId;
 					j.university_id = edUnivSelectedId;
 					try {
 						j.available_seats = long.Parse(txtSeats.Text);
@@ -1000,7 +1000,6 @@ namespace WpfTest
 		/// <param name="e"></param>
 		private void cmbUniversity_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-
 			foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
 			{
 				if (s.Name == "bogey")
@@ -1017,13 +1016,14 @@ namespace WpfTest
 		{
 			foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
 			{
+				if (s.Name == "bogey")
+					return;
+
 				Match m = new Regex(@"\d+").Match(s.Name);
 				int id = int.Parse(m.Value.ToString());
-				edProgSelectedId = id;
 				BuildEdFields(id);
 				return;
-			}
-			
+			}		
 		}
 
 		void BuildEdFields(int progId=0)
@@ -1056,6 +1056,20 @@ namespace WpfTest
 				}
 			}
 			cmbRelatedProgram.SelectedItem = cmbRelatedProgram.Items[0];
+		}
+
+		private void cmbRelatedProgram_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			foreach (ComboBoxItem s in e.AddedItems) //no .First() method available, can't use [0].property because type is just object
+			{
+				if (s.Name == "bogey")
+					return;
+
+				Match m = new Regex(@"\d+").Match(s.Name);
+				int id = int.Parse(m.Value.ToString());
+				edProgSelectedId = id;
+
+			}
 		}
 	}
 }
