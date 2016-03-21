@@ -237,7 +237,7 @@ namespace WpfTest
 					}
 					else if (d.demand > 50)
 					{
-						g = (byte)(-100 + d.demand * 2);
+						b = (byte)(-150 + d.demand * 3);
 					}
 
 
@@ -248,7 +248,8 @@ namespace WpfTest
 					}
 					else if (d.demand < 0 && d.demand > -50)
 					{
-						g = (byte)(50 + d.demand * 2);
+						//g = 0;
+						g = (byte)(50 + d.demand);
 					}
 
 					//demand == 0
@@ -336,6 +337,7 @@ namespace WpfTest
 			using (var context = new newCesModel())
 			{
 				var programs = from p in ces.programs
+							   orderby p.name ascending
 							   where p.parent == 0
 							   select new { p.name, p.id };
 
@@ -363,6 +365,7 @@ namespace WpfTest
 			{
 				var programs = from p in ces.programs
 							   where p.parent == parentId
+							   orderby p.name ascending
 							   select new { p.name, p.id };
 
 				foreach (var p in programs)
@@ -434,10 +437,10 @@ namespace WpfTest
 							  where p.acronym == acronym
 							  select p.id).First();
 
-				var demands = (from d in ces.job_demand
+				var demand = (from d in ces.job_demand
 							   where d.province_id == provId && d.program_id == selectedId
 							   orderby d.id descending
-							   select new { d.demand }).FirstOrDefault();
+							   select d).FirstOrDefault();
 
 				var universities = from u in ces.universities
 								   join p in ces.provinces on u.province_id equals p.id
@@ -449,19 +452,17 @@ namespace WpfTest
 							   orderby w.id descending
 							   select w;
 				
-				List<MenuItem> arr = new List<MenuItem>();
+
+				List < MenuItem > arr = new List<MenuItem>();
 				foreach (var prog in programs)
 				{
 					MenuItem y = new MenuItem();
 
 					StackPanel st = new StackPanel();
 					st.Orientation = Orientation.Vertical;
-
 					y.Header = st;
 
 					TextBlock t2 = new TextBlock();
-
-
 					t2.Text = "Enrollment " + prog.current_enrollment + " of " + prog.available_seats + "  Seats ";
 
 					y.Name = "id_" + prog.university_id.ToString();
@@ -471,7 +472,7 @@ namespace WpfTest
 				}
 
 
-				if (demands == null)
+				if (demand == null)
 				{
 					return;
 				}
@@ -492,14 +493,14 @@ namespace WpfTest
 				//new menu item
 				MenuItem dem = new MenuItem();
 
-				if (demands.demand > 0)
+				if (demand.demand > 0)
 				{
-					dem.Header = "Demand: +" + demands.demand;
+					dem.Header = "Demand: +" + demand.demand;
 					dem.Background = new SolidColorBrush(Color.FromRgb(150, 200, 150));
 				}
-				else if (demands.demand < 0)
+				else if (demand.demand < 0)
 				{
-					dem.Header = "Demand: " + demands.demand;
+					dem.Header = "Demand: " + demand.demand;
 					dem.Background = new SolidColorBrush(Color.FromRgb(200, 150, 150));
 				}
 				else {
@@ -532,6 +533,12 @@ namespace WpfTest
 				c.Items.Add(m);
 
 				//Jobs stuff
+				MenuItem j = new MenuItem();
+				j.Header = "Average Wage: $" + demand.wage;
+				c.Items.Add(j);
+				MenuItem k = new MenuItem();
+				k.Header = "Employed: " + demand.employment;
+				c.Items.Add(k);
 
 			}
 			c.IsOpen = true;
