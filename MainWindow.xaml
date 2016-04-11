@@ -135,7 +135,7 @@
 
 				<Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
 			</Grid>
-            
+			
 			<Image DockPanel.Dock="Right" VerticalAlignment="Top" Source="HintIcon.png" Height="45" Width="45" Margin="10 10 50 10" >
 				<Image.ToolTip>
 					<StackPanel Orientation="Vertical" Width="150">
@@ -253,7 +253,7 @@
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="30"/>
 					<RowDefinition Height="30"/>
-                    <RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
 
 				</Grid.RowDefinitions>
 				<Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Discipline</Label>
@@ -271,15 +271,15 @@
 				<RadioButton Grid.Column="1" Grid.Row="5" Name="rdDown" GroupName="rdForecast"/>
 
 				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Forecast</Label>
-				<TextBox x:Name="txtForecast" Grid.Column="1" Grid.Row="6" Width="180" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtForecast" Grid.Column="1" Grid.Row="6" Width="180" HorizontalAlignment="Left" LostKeyboardFocus="ValidateInt"/>
 
 				<Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">Current Employment</Label>
-				<TextBox x:Name="txtCurrentEmployment" Grid.Column="1" Grid.Row="7" Width="180" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtCurrentEmployment" Grid.Column="1" Grid.Row="7" Width="180" HorizontalAlignment="Left" LostKeyboardFocus="ValidateInt"/>
 
 				<Label Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">Average Salary</Label>
-				<TextBox x:Name="txtAverageSalary" Grid.Column="1" Grid.Row="8" Width="180" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtAverageSalary" Grid.Column="1" Grid.Row="8" Width="180" HorizontalAlignment="Left" LostKeyboardFocus="ValidateLong"/>
 
-                <Button x:Name="btnJobsSave"  Grid.Column="0" Grid.Row="10" Click="SubmitJobsData" Width="100">Accept</Button>
+				<Button x:Name="btnJobsSave"  Grid.Column="0" Grid.Row="10" Click="SubmitJobsData" Width="100">Accept</Button>
 				<Button Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" Width="100" Click="ClearJobsData">Cancel</Button>
 			</Grid>
 
@@ -334,10 +334,10 @@
 				<ComboBox x:Name="cmbRelatedProgram" SelectionChanged="cmbRelatedProgram_SelectionChanged" Width="180" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left"/>
 
 				<Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Seats</Label>
-				<TextBox x:Name="txtSeats" Width="180" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtSeats" Width="180" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" LostKeyboardFocus="ValidateLong"/>
 
 				<Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Current Enrollment</Label>
-				<TextBox x:Name="txtCurrentEnrollment" Width="180" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left"/>
+				<TextBox x:Name="txtCurrentEnrollment" Width="180" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" LostKeyboardFocus="ValidateLong"/>
 
 				<Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Graduates per Year</Label>
 				<TextBox x:Name="txtGraduatesPerYear" Width="180" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"/>

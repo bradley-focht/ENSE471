@@ -22,6 +22,7 @@ namespace WpfTest
 		SolidColorBrush midToneBack = new SolidColorBrush(Color.FromRgb(10, 40, 70));
 		SolidColorBrush hlightBack = new SolidColorBrush(Color.FromRgb(20, 80, 200));
 		SolidColorBrush hlightLightBack = new SolidColorBrush(Color.FromRgb(120, 200, 255));
+		SolidColorBrush redSolidColorBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 		private SolidColorBrush saveBrush = new SolidColorBrush();
 		ColorAnimation saveAnimation = new ColorAnimation();
 	
@@ -1077,6 +1078,22 @@ namespace WpfTest
 				edProgSelectedId = id;
 
 			}
+		}
+
+		private void ValidateInt(object sender, RoutedEventArgs e)
+		{
+			TextBox txt = sender as TextBox;
+			int t;
+			if(txt != null)
+				txt.BorderBrush = !int.TryParse(txt.Text, out t) && txt.Text != String.Empty ? redSolidColorBrush : Brushes.Transparent;
+		}
+
+		private void ValidateLong(object sender, RoutedEventArgs e)
+		{
+			TextBox txt = sender as TextBox;
+			long t;
+			if (txt != null)
+				txt.BorderBrush = !long.TryParse(txt.Text, out t) && txt.Text != String.Empty ? redSolidColorBrush : Brushes.Transparent;
 		}
 	}
 }
