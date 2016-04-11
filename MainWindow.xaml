@@ -41,6 +41,8 @@
 			<Setter Property="HorizontalContentAlignment" Value="Left" />
 			<Setter Property="BorderBrush" Value="Transparent"/>
 		</Style>
+
+		<ImageBrush x:Key="AddButtonImageBrush" ImageSource="import.png" Stretch="UniformToFill"/>
 	</Window.Resources>
 	<DockPanel Name="dckMain" HorizontalAlignment="Center" Width="1000" Height="620">
 		<Grid Name="grdTopButtons" DockPanel.Dock="Top">
@@ -227,6 +229,9 @@
 					<Button Background="#1450C8">Saskatchewan</Button>-->
 
 			</StackPanel>
+
+			<Button x:Name="btnImport"  DockPanel.Dock="Right" VerticalAlignment="Top" Background="{StaticResource AddButtonImageBrush}" Height="50" Width="50" Click="ImportData"/>
+			
 			<Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
 				<Grid.Resources>
 					<Style TargetType="{x:Type Label}">
