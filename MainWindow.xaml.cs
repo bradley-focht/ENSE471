@@ -1111,5 +1111,10 @@ namespace WpfTest
 				txt.BorderThickness = new Thickness(0);
 			}
 		}
+
+		private void ImportData(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("TODO: Brad implement data import wizard.");
+		}
 	}
 }
