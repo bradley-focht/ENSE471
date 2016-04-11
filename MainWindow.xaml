@@ -79,11 +79,11 @@
 			</StackPanel>
 		</Grid>
 
-            <DockPanel Name="dckPowerData" DockPanel.Dock="Right" Width="300" Visibility="Collapsed">
+            <DockPanel Name="dckPowerData" DockPanel.Dock="Right" Width="500" Visibility="Visible">
 
 
                 <StackPanel>
-                    <Button Name="btnShowPowerData" Height="20" Width="50"/>
+                    <Button Name="btnShowPowerData" Height="20" Width="50" Content="Advanced Search"/>
                 </StackPanel>
             </DockPanel>
 
