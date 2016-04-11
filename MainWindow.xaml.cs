@@ -1145,5 +1145,15 @@ namespace WpfTest
 		{
 			MessageBox.Show("TODO: Brad implement data import wizard.");
 		}
+
+		private void btnShowPowerData_Click(object sender, RoutedEventArgs e)
+		{
+			dckPowerData.Visibility = Visibility.Visible;
+		}
+
+		private void btnHidePowerData_Click(object sender, RoutedEventArgs e)
+		{
+			dckPowerData.Visibility = Visibility.Collapsed;
+		}
 	}
 }

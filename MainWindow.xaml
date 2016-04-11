@@ -79,14 +79,48 @@
 			</StackPanel>
 		</Grid>
 
-            <DockPanel Name="dckPowerData" DockPanel.Dock="Right" Width="500" Visibility="Visible">
-
-
-                <StackPanel>
-                    <Button Name="btnShowPowerData" Height="20" Width="50" Content="Advanced Search"/>
+        <DockPanel Name="dckPowerData" DockPanel.Dock="Right"  Width="200">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Button Name="btnHidePowerData" Content="Hide" Foreground="White" Width="40" Background="#0A2846" Click="btnHidePowerData_Click"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="select " Foreground="White"/>
+                    <ComboBox Width="100">
+                        <ComboBoxItem Content="jobs_projection"></ComboBoxItem>
+                        <ComboBoxItem Content="university_programs"></ComboBoxItem>
+                        <ComboBoxItem Content="universities"></ComboBoxItem>
+                    </ComboBox>
+                    
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="where " Foreground="White"/>
+                    <ComboBox Width="100">
+                        <ComboBoxItem Content="university"></ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="is " Foreground="White"/>
+                    <ComboBox Width="100">
+                        <ComboBoxItem Content="equal to"></ComboBoxItem>
+                        <ComboBoxItem Content="greater than"></ComboBoxItem>
+                        <ComboBoxItem Content="less than"></ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="100" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="order " Foreground="White"/>
+                    <ComboBox Width="100">
+                        <ComboBoxItem Content="ascending"></ComboBoxItem>
+                        <ComboBoxItem Content="descending"></ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
             </DockPanel>
-
+   
 
 
         <DockPanel Name="dckMap" Panel.ZIndex="99"> 
@@ -150,38 +184,24 @@
 
 				<Polygon Name="pei" MouseDown="pei_MouseDown" Points="497, 374 504, 375 514, 374 511, 372 516, 366 509, 368 505, 371 500, 371 496, 368" Fill="Red" />
 			</Grid>
-			
-			<Image DockPanel.Dock="Right" VerticalAlignment="Top" Source="HintIcon.png" Height="45" Width="45" Margin="10 10 50 10" >
-				<Image.ToolTip>
-					<StackPanel Orientation="Vertical" Width="150">
-						<TextBlock>
+            <StackPanel>
+                <Image DockPanel.Dock="Right" VerticalAlignment="Top" Source="HintIcon.png" Height="45" Width="45" Margin="10 10 50 10" >
+                    <Image.ToolTip>
+                        <StackPanel Orientation="Vertical" Width="150">
+                            <TextBlock>
 							Canada Education Strategy
-						</TextBlock>
-						<TextBlock TextWrapping="Wrap">
-						Select program then click on the provinces to view information. 
-						
-						</TextBlock>
-					</StackPanel>
-				</Image.ToolTip>
-			</Image>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap">
+						Select program then click on the provinces to view information.
 
-					<FlowDocumentReader Name="flowStats" DockPanel.Dock="Right" ViewingMode="Page" MinZoom="100" IsFindEnabled ="False" IsScrollViewEnabled="True" IsTwoPageViewEnabled="False"  UseLayoutRounding="True">
-				<FlowDocumentReader.Resources>
-					<Style TargetType="TableCell">
-						<Setter Property="TextAlignment" Value="Center"/>
-						<Setter Property="FontSize" Value="12" />
-						<Setter Property="FontFamily" Value="Arial" />
-						<Setter Property="Foreground" Value="White" />
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+                <Button Name="btnShowPowerData" Content="Advanced Search" Background="#0A2846" Foreground="White" Click="btnShowPowerData_Click" />
+            </StackPanel>
 
-					</Style>
-				</FlowDocumentReader.Resources>
-				<FlowDocument Name="flowDoc">
-
-
-				</FlowDocument>
-			</FlowDocumentReader>
-
-		</DockPanel>
+        </DockPanel>
 
 		<Grid Name="grdLogin" Width="1000">
 			<Grid.ColumnDefinitions>
