@@ -56,6 +56,7 @@ namespace WpfTest
 			btnNavPri.Visibility = Visibility.Collapsed;
 			btnNavSec.Visibility = Visibility.Collapsed;
 			btnNavTitle.Visibility = Visibility.Collapsed;
+			dckPowerData.Visibility = Visibility.Collapsed;
 
 			//set background colour
 			dckMain.Background = defaultBack;
@@ -125,12 +126,28 @@ namespace WpfTest
 					b.Name = "btnProv_" + p.id;
 					b.Content = p.name;
 
-					if (clickedBtn == p.id)		//highlight button selection
-						b.Background = hlightBack;
-					else
-						b.Background = midToneBack;
-					b.Click += btnEdProv_Click;
-					navScreen.Children.Add(b);
+					if (username != "somebody" || username == null)
+					{
+						if (clickedBtn == p.id)
+						{       //highlight button selection
+							b.Background = hlightBack;
+
+						}
+						else
+							b.Background = midToneBack;
+
+					} else {
+						if (p.name != "Saskatchewan")
+						{
+							b.IsEnabled = false;
+						}
+						else
+							b.Background = hlightBack;
+					}
+
+						b.Click += btnEdProv_Click;
+						navScreen.Children.Add(b);
+					
 				}
 			}
 		}
@@ -559,6 +576,7 @@ namespace WpfTest
 			dckMap.Visibility = Visibility.Collapsed;
 			dckDataEntry.Visibility = Visibility.Collapsed;
 			grdEducation.Visibility = Visibility.Collapsed;
+			dckPowerData.Visibility = Visibility.Collapsed;
 			grdJobs.Visibility = Visibility.Collapsed;
 
 			if (sender.Equals(btnEducation))
@@ -577,6 +595,17 @@ namespace WpfTest
 			}
 			else if (sender.Equals(btnLogin))
 			{
+				//totally the right place for this code
+				if (txtUsername.Text == "")
+				{
+					username = "nobody";
+
+				}
+				else {
+					username = "somebody";        //i have no idea how username keeps getting set. 
+					ed_buildPriMenu();
+				}
+
 				dckMap.Visibility = Visibility.Visible;
 				grdTopButtons.Visibility = Visibility.Visible;
 				btnNavPri.Visibility = Visibility.Visible;

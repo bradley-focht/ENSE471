@@ -7,7 +7,9 @@
 		mc:Ignorable="d"
 		Loaded="Window_Loaded"
 		ResizeMode="NoResize"
-		Title="Canadian Education Strategy" Height="620" Width="1000" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+		Title="Canadian Education Strategy" Height="620" Width="1000" Background="Black" 
+        HorizontalAlignment="Center" 
+        VerticalAlignment="Top">
 	<Window.Resources>
 		<Style x:Key="cxMenuItemStyle" TargetType="{x:Type MenuItem}">
 			<Setter Property="Background" Value="White"/>
@@ -74,10 +76,20 @@
 				<TextBlock Text="Log out" HorizontalAlignment="Right" Foreground="Wheat" />
 			</StackPanel>
 		</Grid>
-		
-		<DockPanel Name="dckMap">
 
-			<Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2" Margin="5"  >
+            <DockPanel Name="dckPowerData" DockPanel.Dock="Right" Width="300" Visibility="Collapsed">
+
+
+                <StackPanel>
+                    <Button Name="btnShowPowerData" Height="20" Width="50"/>
+                </StackPanel>
+            </DockPanel>
+
+
+
+        <DockPanel Name="dckMap" Panel.ZIndex="99"> 
+
+            <Border DockPanel.Dock="Left" BorderBrush="#0A2846" Background="#051423" BorderThickness="2, 0, 0, 2" Margin="5"  >
 				<StackPanel Orientation="Vertical">
 					<StackPanel Orientation="Horizontal" Name="btnNavTitle" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center"/>
 					<StackPanel Orientation="Horizontal">
@@ -86,7 +98,8 @@
 					</StackPanel>
 				</StackPanel>
 			</Border>
-			<Grid  Name="gridMap" >
+
+			<Grid  Name="gridMap">
 
 				<Polygon Name="bc"  MouseDown="bc_MouseDown" Points="21, 196 113, 252 86, 317 91, 326 109, 369 106, 379 108, 386 43, 359 36, 349 37, 342 31, 336 32, 351 38, 357 37, 364 28, 356 25, 354 16, 333 19, 330 16, 323 19, 323 29, 335 30, 331 23, 325 27, 310 28, 299 22, 300 30, 292 25, 292 26, 280 38, 264 33, 252 35, 230 33, 210 25, 212 21, 211 " Fill="Blue" />
 				<Polygon Name="bc_hg" MouseDown="bc_MouseDown" Points="11, 272 12, 276 16, 277 8, 285 11, 288 8, 289 7, 298 5, 298 4, 287 5, 277" Fill="Blue" />
