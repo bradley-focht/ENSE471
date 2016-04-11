@@ -1084,16 +1084,32 @@ namespace WpfTest
 		{
 			TextBox txt = sender as TextBox;
 			int t;
-			if(txt != null)
-				txt.BorderBrush = !int.TryParse(txt.Text, out t) && txt.Text != String.Empty ? redSolidColorBrush : Brushes.Transparent;
+			if (txt != null && (!int.TryParse(txt.Text, out t) && txt.Text != String.Empty))
+			{
+				txt.BorderBrush = redSolidColorBrush;
+				txt.BorderThickness = new Thickness(2);
+			}
+			else
+			{
+				txt.BorderBrush = Brushes.Transparent;
+				txt.BorderThickness = new Thickness(0);
+			}
 		}
 
 		private void ValidateLong(object sender, RoutedEventArgs e)
 		{
 			TextBox txt = sender as TextBox;
 			long t;
-			if (txt != null)
-				txt.BorderBrush = !long.TryParse(txt.Text, out t) && txt.Text != String.Empty ? redSolidColorBrush : Brushes.Transparent;
+			if (txt != null && (!long.TryParse(txt.Text, out t) && txt.Text != String.Empty))
+			{
+				txt.BorderBrush = redSolidColorBrush;
+				txt.BorderThickness = new Thickness(2);
+			}
+			else
+			{
+				txt.BorderBrush = Brushes.Transparent;
+				txt.BorderThickness = new Thickness(0);
+			}
 		}
 	}
 }
