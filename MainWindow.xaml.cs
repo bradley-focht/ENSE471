@@ -1146,6 +1146,11 @@ namespace WpfTest
 			MessageBox.Show("TODO: Brad implement data import wizard.");
 		}
 
+		private void ExportData(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("TODO: Sean implement data export wizard.");
+		}
+
 		private void btnShowPowerData_Click(object sender, RoutedEventArgs e)
 		{
 			dckPowerData.Visibility = Visibility.Visible;

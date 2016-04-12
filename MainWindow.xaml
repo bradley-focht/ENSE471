@@ -84,9 +84,10 @@
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <Button Name="btnHidePowerData" Content="Hide" Foreground="White" Width="40" Background="#0A2846" Click="btnHidePowerData_Click"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="select " Foreground="White"/>
-                    <ComboBox Width="100">
+
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="select " Foreground="White" Width="60"/>
+                    <ComboBox Width="120">
                         <ComboBoxItem Content="jobs_projection"></ComboBoxItem>
                         <ComboBoxItem Content="university_programs"></ComboBoxItem>
                         <ComboBoxItem Content="universities"></ComboBoxItem>
@@ -94,29 +95,34 @@
                     
                     
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="where " Foreground="White"/>
-                    <ComboBox Width="100">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="where " Foreground="White" Width="60"/>
+                    <ComboBox Width="120">
                         <ComboBoxItem Content="university"></ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="is " Foreground="White"/>
-                    <ComboBox Width="100">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="is " Foreground="White" Width="60"/>
+                    <ComboBox Width="120">
                         <ComboBoxItem Content="equal to"></ComboBoxItem>
                         <ComboBoxItem Content="greater than"></ComboBoxItem>
                         <ComboBoxItem Content="less than"></ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Width="100" />
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Width="60" />
+                    <TextBox Width="120" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="order " Foreground="White"/>
-                    <ComboBox Width="100">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="order by" Foreground="White" Width="60"/>
+                    <ComboBox Width="120">
                         <ComboBoxItem Content="ascending"></ComboBoxItem>
                         <ComboBoxItem Content="descending"></ComboBoxItem>
                     </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="export" Width="60" Foreground="White" />
+                    <Button x:Name="btnExport"  DockPanel.Dock="Right" VerticalAlignment="Top" Background="{StaticResource AddButtonImageBrush}" Height="50" Width="50" Click="ExportData"/>
                 </StackPanel>
             </StackPanel>
             </DockPanel>
@@ -249,10 +255,12 @@
 					<Button Background="#1450C8">Saskatchewan</Button>-->
 
 			</StackPanel>
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Top" >
+			    <Button x:Name="btnImport"  Background="{StaticResource AddButtonImageBrush}" Height="50" Width="50" Click="ImportData"/>
+                <Label Foreground="White">import</Label>
+            </StackPanel>
 
-			<Button x:Name="btnImport"  DockPanel.Dock="Right" VerticalAlignment="Top" Background="{StaticResource AddButtonImageBrush}" Height="50" Width="50" Click="ImportData"/>
-			
-			<Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
+            <Grid x:Name="grdJobs" Margin="30" Visibility="Collapsed">
 				<Grid.Resources>
 					<Style TargetType="{x:Type Label}">
 						<Setter Property="Foreground" Value="White"/>
